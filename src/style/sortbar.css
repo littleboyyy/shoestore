@@ -1,0 +1,10 @@
+.sort-nav {
+    position: relative;
+    left: 325px;
+    top: 5px;
+    max-width: 3.5%;
+}
+
+.sort-nav img {
+    max-width: 100%;
+}
