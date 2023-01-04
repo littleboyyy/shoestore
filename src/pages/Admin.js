@@ -21,7 +21,7 @@ function Admin() {
             autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
+            pauseOnHover: false,
             draggable: true,
             progress: undefined,
             theme: "light",
@@ -100,9 +100,6 @@ function Admin() {
                 />
 
                 <br /><br />
-                {/* <label>
-                    <input type="checkbox" name="remember" /> Remember me
-                </label> */}
             </div>
         </div>
     )
