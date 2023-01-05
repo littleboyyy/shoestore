@@ -18,7 +18,7 @@ function Admin() {
     const notifyLoginFail = () => {
         toast.error('Wrong Username or Password!', {
             position: "top-center",
-            autoClose: 2000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,

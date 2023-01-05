@@ -1,4 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 require_once("connect_db.php");
 $query="select * from shoe";
 $res= mysqli_query($conn,$query);
@@ -13,4 +17,3 @@ echo json_encode($rows);
 
 mysqli_free_result($res);
 mysqli_close($conn);
-?>

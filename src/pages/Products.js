@@ -12,15 +12,13 @@ const qtyFromSession = parseInt(sessionStorage.getItem('quantity')) || 0
 
 
 function Products() {
-
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
     const [quantity, setQuantity] = useState(qtyFromSession)
     const [searchResults, setSearchResults] = useState('')
     const [sortKey, setSortKey] = useState('')
     const [cartItems, setCartItems] = useState(cartFromSession)
-
-    useEffect(() => {
-        const sorted_products = products
-    })
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         sessionStorage.setItem('cartItems', JSON.stringify(cartItems))
@@ -30,29 +28,46 @@ function Products() {
         sessionStorage.setItem('quantity', quantity)
     }, [quantity])
 
+    useEffect(() => {
+        fetch("http://localhost:3000/server/get_all_prod.php")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setProducts(result);
+                    console.log(products)
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                    console.log('Loi')
+                }
+            )
+    }, [])
 
-    const products = [{
-        name: 'Nike Super',
-        price: 380,
-        color: 'Red',
-        size: '38',
-        img: 'https://static.nike.com/a/images/t_default/e6da41fa-1be4-4ce5-b89c-22be4f1f02d4/air-force-1-07-shoes-rWtqPn.png'
-    },
-    {
-        name: 'Nike Air',
-        price: 200,
-        color: 'Blue',
-        size: '40',
-        img: 'https://media.wired.co.uk/photos/63727049ab57b5ecdfc2fb42/16:9/w_2560%2Cc_limit/Nike-Swoosh-News-Gear.jpg'
-    },
-    {
-        name: 'Addias',
-        price: 300,
-        color: 'Black',
-        size: '39',
-        img: 'https://assets.adidas.com/images/w_600,f_auto,q_auto/87cd0b80e0434c758b15ae9801598eb2_9366/Giay_Chay_Bo_adidas_4DFWD_2_Xam_GX9250_01_standard.jpg'
-    }
-    ]
+
+    // const products = [{
+    //     name: 'Nike Super',
+    //     price: 380,
+    //     color: 'Red',
+    //     size: '38',
+    //     img: 'https://static.nike.com/a/images/t_default/e6da41fa-1be4-4ce5-b89c-22be4f1f02d4/air-force-1-07-shoes-rWtqPn.png'
+    // },
+    // {
+    //     name: 'Nike Air',
+    //     price: 200,
+    //     color: 'Blue',
+    //     size: '40',
+    //     img: 'https://media.wired.co.uk/photos/63727049ab57b5ecdfc2fb42/16:9/w_2560%2Cc_limit/Nike-Swoosh-News-Gear.jpg'
+    // },
+    // {
+    //     name: 'Addias',
+    //     price: 300,
+    //     color: 'Black',
+    //     size: '39',
+    //     img: 'https://assets.adidas.com/images/w_600,f_auto,q_auto/87cd0b80e0434c758b15ae9801598eb2_9366/Giay_Chay_Bo_adidas_4DFWD_2_Xam_GX9250_01_standard.jpg'
+    // }
+    // ]
 
     //add each item's quantity
 
@@ -61,6 +76,7 @@ function Products() {
         if (products.length > 0) {
             for (let index = 0; index < products.length; index++) {
                 products[index].itemQuantity = 0
+                products[index].size = ''
             }
         }
     }, [])
@@ -79,17 +95,17 @@ function Products() {
     }
 
     const increaseSort = (a, b) => {
-        if (a.price < b.price)
+        if (parseInt(a.price) < parseInt(b.price))
             return -1
-        if (a.price > b.price)
+        if (parseInt(a.price) > parseInt(b.price))
             return 1
         return 0
     }
 
     const decreaseSort = (a, b) => {
-        if (a.price < b.price)
+        if (parseInt(a.price) < parseInt(b.price))
             return 1
-        if (a.price > b.price)
+        if (parseInt(a.price) > parseInt(b.price))
             return -1
         return 0
     }
@@ -147,15 +163,15 @@ function Products() {
     //     } : x))
     // }
 
-    // //Set item's size
+    //Set item's size
 
-    // const onSetSize = (item, size) => {
-    //     const exist = cartItems.find(x => x.name === item.name)
-    //     exist.size = size
-    //     setCartItems(cartItems.map(x => x.name === item.name ? {
-    //         ...exist, size: exist.size
-    //     } : x))
-    // }
+    const onSetSize = (item, size) => {
+        const exist = cartItems.find(x => x.name === item.name)
+        exist.size = size
+        setCartItems(cartItems.map(x => x.name === item.name ? {
+            ...exist, size: exist.size
+        } : x))
+    }
 
 
     return (

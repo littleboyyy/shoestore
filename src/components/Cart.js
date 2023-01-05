@@ -24,12 +24,13 @@ import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import '../style/cart.css'
 
 
-export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease, }) {
+export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease, onSetSize }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     var totalCost = 0
+    var shippingCost = 40
 
     cartItems.forEach(item => {
         totalCost = totalCost + (item.price * item.itemQuantity)
@@ -100,7 +101,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             <MDBRipple rippleTag="div" rippleColor="light"
                                                                 className="bg-image rounded hover-zoom hover-overlay">
                                                                 <img
-                                                                    src={item.img}
+                                                                    src={item.imagePath}
                                                                     className="w-100" />
                                                                 <a href="#!">
                                                                     <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)", }}>
@@ -116,7 +117,12 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             Color:
                                                             <p>{item.color}</p>
                                                             Size:
-                                                            <p>{item.size}</p>
+                                                            <Form.Select aria-label="Default select example">
+                                                                <option>Open this select menu</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </Form.Select>
                                                             <br />
 
                                                             <Button variant="outline-danger" onClick={() => onRemove(item)}>
@@ -176,11 +182,11 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                     <MDBListGroupItem
                                                         className="d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                                         Products
-                                                        <span>{totalCost}</span>
+                                                        <span>${parseFloat(totalCost).toFixed(2)}</span>
                                                     </MDBListGroupItem>
                                                     <MDBListGroupItem className="d-flex justify-content-between align-items-center px-0">
                                                         Shipping
-                                                        <span>Gratis</span>
+                                                        <span>${shippingCost}</span>
                                                     </MDBListGroupItem>
                                                     <MDBListGroupItem
                                                         className="d-flex justify-content-between align-items-center border-0 px-0 mb-3">
@@ -191,7 +197,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             </strong>
                                                         </div>
                                                         <span>
-                                                            <strong>{totalCost}</strong>
+                                                            <strong>${parseFloat(totalCost + shippingCost).toFixed(2)}</strong>
                                                         </span>
                                                     </MDBListGroupItem>
                                                 </MDBListGroup>
@@ -206,60 +212,6 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                             </MDBRow>
                         </MDBContainer>
                     </section>
-
-                    {/* <Container>
-                        <div>
-                            {cartItems.length === 0 && <div>Cart is empty,please add courses you want to register! </div>}
-                            {cartItems.map(item => (
-                                <div className="container">
-                                    <br />
-                                    <div className="row">
-                                        <div className="col-xs-8">
-                                            <div className="panel panel-info">
-                                                <div className="panel-body">
-                                                    <div class="row">
-                                                        <div className="cart-items">
-                                                            <br />
-                                                            <div className="col-xs-4">
-                                                                <h4 className="product-name"><strong>{item.name}</strong></h4>
-                                                            </div>
-                                                            <div className="col-xs-6">
-                                                                <div className="col-xs-6 text-right">
-                                                                    <h6><strong>{item.price}</strong></h6>
-                                                                </div>
-                                                                <div>
-
-                                                                </div>
-                                                                <h6><strong>{item.itemQuantity}</strong></h6>
-                                                                <button onClick={() => onAdd(item)}
-                                                                >
-                                                                    tang
-                                                                </button>
-                                                                <button onClick={() => onDecrease(item)}>
-                                                                    giam
-                                                                </button>
-                                                                <br /><br />
-                                                                <div className="col-xs-4">
-                                                                    <button type="button" className="btn btn-danger btn-act" onClick={() => onRemove(item)}>Remove</button>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                            {
-                                totalCost > 0 &&
-                                <div>
-                                    Total Cost is :{totalCost}
-                                </div>
-                            }
-                        </div>
-                    </Container> */}
                 </Offcanvas.Body>
             </Offcanvas>
         </>
