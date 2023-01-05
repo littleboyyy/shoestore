@@ -14,6 +14,19 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
             autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
+    }
+
+    const notifyNotFound = () => {
+        toast.error('Item Not Found!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
@@ -24,8 +37,9 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
 
     return (
         <Row>
+            {/* {prodOnSearch !== '' && !getProdOnSearch && notifyNotFound()} */}
             {
-                prodOnSearch === '' ?
+                prodOnSearch === '' || !getProdOnSearch ?
                     products.map(item => (
                         <Col style={{ padding: '50px' }}>
                             <div className="product-card">
@@ -55,23 +69,17 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
 
                     )) :
                     (
-                        getProdOnSearch ?
-                            <Col style={{ paddingLeft: '25px' }}>
-                                <div className="product-card">
-                                    <h3 className="product-name">{getProdOnSearch.name}</h3>
-                                    <img className="product-image" src={getProdOnSearch.img} />
-                                    <p className="product-price">{getProdOnSearch.price}</p>
-                                    <button className="add-to-cart" onClick={() => onAdd(getProdOnSearch)}>
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </Col>
-
-                            :
-                            <div>
-                                <p>Item Not Found :(</p>
+                        getProdOnSearch &&
+                        <Col style={{ paddingLeft: '25px' }}>
+                            <div className="product-card">
+                                <h3 className="product-name">{getProdOnSearch.name}</h3>
+                                <img className="product-image" src={getProdOnSearch.img} />
+                                <p className="product-price">{getProdOnSearch.price}</p>
+                                <button className="add-to-cart" onClick={() => onAdd(getProdOnSearch)}>
+                                    Add to Cart
+                                </button>
                             </div>
-
+                        </Col>
                     )
 
             }

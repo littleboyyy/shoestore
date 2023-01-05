@@ -3,7 +3,8 @@ import Cart from "../components/Cart";
 import SearchBar from "../components/SearchBar";
 import ProductCard from "../components/ProductCard";
 import SortBar from "../components/SortBar";
-import '../style/card.css'
+import { FaArrowAltCircleLeft, FaArrowLeft } from "react-icons/fa";
+import '../style/products.css'
 
 
 const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems')) || []
@@ -158,9 +159,9 @@ function Products() {
 
 
     return (
-        <div>
+        <div className="product-page">
             <br />
-            <button>Back to Home</button>
+            <button><FaArrowAltCircleLeft></FaArrowAltCircleLeft></button>
             <Cart quantity={quantity} cartItems={cartItems}
                 onRemove={onRemove} onAdd={onAdd} onDecrease={onDecrease}
             />
@@ -168,6 +169,14 @@ function Products() {
             <br />
             <SearchBar onSearch={handleSearch} />
             <SortBar onSelect={handleSort} />
+            <div className="product-page-message">
+                <h1>We
+                    <span class="underlined underline-clip"> Sell</span>
+                    <br />
+                    Best <span class="underlined underline-mask">Shoes!</span>
+                    <br />
+                    <span class="underlined underline-overflow"></span></h1>
+            </div>
 
             <br /><br /><br /><br />
 
@@ -186,8 +195,6 @@ function Products() {
                 sortKey === 'decrease' && products.sort((a, b) => decreaseSort(a, b)) &&
                 <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />
             }
-
-
         </div>
     )
 }

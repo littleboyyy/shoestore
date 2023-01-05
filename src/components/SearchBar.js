@@ -1,9 +1,6 @@
 import React from 'react';
 import '../style/searchBar.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import SortBar from "../components/SortBar";
 import { FaSearch } from 'react-icons/fa';
 
 function SearchBar({ onSearch }) {

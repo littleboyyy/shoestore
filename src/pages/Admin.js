@@ -15,8 +15,21 @@ function Admin() {
     const [show, setShow] = useState(true);
     const [items, setItems] = useState([]);
 
-    const notifyNotFound = () => {
+    const notifyLoginFail = () => {
         toast.error('Wrong Username or Password!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
+
+    const notifyLoginSuccess = () => {
+        toast.success('Login Successfully!', {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: false,
@@ -31,16 +44,18 @@ function Admin() {
 
 
 
+
     var userValidate = (username, password) => {
         const unameExist = items.find(x => x.uname === username)
         const passwdExist = items.find(y => y.passwd === password)
 
         if (unameExist && passwdExist) {
             localStorage.setItem('isValidate', true)
+            notifyLoginSuccess()
             navigate('/admin/manage')
         }
         else {
-            notifyNotFound()
+            notifyLoginFail()
             localStorage.setItem('isValidate', false)
         }
     }
