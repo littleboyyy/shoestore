@@ -42,9 +42,8 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
 
     return (
         <Row>
-            {/* {prodOnSearch !== '' && !getProdOnSearch && notifyNotFound()} */}
             {
-                prodOnSearch === '' || !getProdOnSearch ?
+                prodOnSearch === '' ?
                     products.map(item => (
                         <Col style={{ padding: '50px' }}>
                             <div className="product-card">
@@ -85,19 +84,30 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
 
                     )) :
                     (
-                        getProdOnSearch &&
-                        getProdOnSearch.map(productsFound =>
-                            <Col style={{ paddingLeft: '25px' }}>
-                                <div className="product-card">
-                                    <img className="product-image" src={productsFound.imagePath} />
-                                    <h3 className="product-name overflow-wrap">{productsFound.name}</h3>
-                                    <p className="product-price">${productsFound.price}</p>
-                                    <button className="add-to-cart" onClick={() => onAdd(productsFound)}>
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </Col>
-                        )
+                        getProdOnSearch.length > 0 ?
+                            getProdOnSearch.map(productsFound =>
+                                <Col style={{ paddingLeft: '25px' }}>
+                                    <div className="product-card">
+                                        <img className="product-image" src={productsFound.imagePath} />
+                                        <h3 className="product-name overflow-wrap">{productsFound.name}</h3>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                            <p className="product-price" style={{ textDecorationLine: 'line-through' }}>
+                                                ${productsFound.price}
+                                            </p>
+                                            <p className="product-price" style={{ color: 'red' }}>
+                                                ${parseFloat(productsFound.price - (productsFound.price * productsFound.sale / 100)).toFixed(2)}
+                                            </p>
+                                        </div>
+                                        <button className="add-to-cart" onClick={() => onAdd(productsFound)}>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </Col>
+                            )
+                            :
+                            <div className='not-found-img'>
+                                <img src="https://o.remove.bg/downloads/b9160591-387c-4e3c-9864-eac05b9c5b78/153-1533013_sorry-no-results-found-removebg-preview.png" alt="" />
+                            </div>
                     )
 
             }

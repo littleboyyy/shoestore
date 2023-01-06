@@ -20,6 +20,8 @@ function Products() {
     const [cartItems, setCartItems] = useState(cartFromSession)
     const [products, setProducts] = useState([]);
 
+    const oldProducts = []
+
     useEffect(() => {
         sessionStorage.setItem('cartItems', JSON.stringify(cartItems))
     }, [cartItems])
@@ -35,41 +37,14 @@ function Products() {
                 (result) => {
                     setIsLoaded(true);
                     setProducts(result);
-                    console.log(products)
                 },
                 (error) => {
                     setIsLoaded(true);
                     setError(error);
-                    console.log('Loi')
+                    console.log('Error calling API')
                 }
             )
     }, [])
-
-
-    // const products = [{
-    //     name: 'Nike Super',
-    //     price: 380,
-    //     color: 'Red',
-    //     size: '38',
-    //     img: 'https://static.nike.com/a/images/t_default/e6da41fa-1be4-4ce5-b89c-22be4f1f02d4/air-force-1-07-shoes-rWtqPn.png'
-    // },
-    // {
-    //     name: 'Nike Air',
-    //     price: 200,
-    //     color: 'Blue',
-    //     size: '40',
-    //     img: 'https://media.wired.co.uk/photos/63727049ab57b5ecdfc2fb42/16:9/w_2560%2Cc_limit/Nike-Swoosh-News-Gear.jpg'
-    // },
-    // {
-    //     name: 'Addias',
-    //     price: 300,
-    //     color: 'Black',
-    //     size: '39',
-    //     img: 'https://assets.adidas.com/images/w_600,f_auto,q_auto/87cd0b80e0434c758b15ae9801598eb2_9366/Giay_Chay_Bo_adidas_4DFWD_2_Xam_GX9250_01_standard.jpg'
-    // }
-    // ]
-
-    //add each item's quantity
 
 
     useEffect(() => {
@@ -78,8 +53,13 @@ function Products() {
                 products[index].itemQuantity = 0
                 products[index].size = ''
             }
+            oldProducts = products
         }
     }, [])
+
+    const getFinalPrice = (item) => {
+        return parseInt(parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2))
+    }
 
 
     //search handle
@@ -95,17 +75,17 @@ function Products() {
     }
 
     const increaseSort = (a, b) => {
-        if (parseInt(a.price) < parseInt(b.price))
+        if (getFinalPrice(a) < getFinalPrice(b))
             return -1
-        if (parseInt(a.price) > parseInt(b.price))
+        if (getFinalPrice(a) > getFinalPrice(b))
             return 1
         return 0
     }
 
     const decreaseSort = (a, b) => {
-        if (parseInt(a.price) < parseInt(b.price))
+        if (getFinalPrice(a) < getFinalPrice(b))
             return 1
-        if (parseInt(a.price) > parseInt(b.price))
+        if (getFinalPrice(a) > getFinalPrice(b))
             return -1
         return 0
     }
@@ -196,6 +176,8 @@ function Products() {
             </div>
 
             <br /><br /><br /><br />
+
+            {console.log(oldProducts)}
 
             {
                 sortKey === '' &&

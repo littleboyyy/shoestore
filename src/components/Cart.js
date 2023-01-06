@@ -32,8 +32,10 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
     var totalCost = 0
     var shippingCost = 40
 
+
+
     cartItems.forEach(item => {
-        totalCost = totalCost + (item.price * item.itemQuantity)
+        totalCost = totalCost + (parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2) * item.itemQuantity)
     })
 
 
@@ -138,17 +140,17 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             <br /><br /> <br />
 
 
-                                                            <Button variant="primary" onClick={() => onDecrease(item)}>
-                                                                <FaMinus></FaMinus>
+                                                            <Button variant="outline-danger" onClick={() => onDecrease(item)}>
+                                                                -
                                                             </Button>
-                                                            <label htmlFor="" style={{ marginLeft: '1px', marginRight: '1px' }}>{item.itemQuantity}</label>
-                                                            <Button variant="primary" onClick={() => onAdd(item)}>
-                                                                <FaPlus></FaPlus>
+                                                            <span style={{ marginLeft: '4px', marginRight: '4px' }}>{item.itemQuantity}</span>
+                                                            <Button variant="outline-success" onClick={() => onAdd(item)}>
+                                                                +
                                                             </Button>
 
                                                             <br /><br />
                                                             <p className="text-start text-md-center">
-                                                                <strong>${item.price}</strong>
+                                                                <strong>${parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2)}</strong>
                                                             </p>
                                                         </MDBCol>
                                                     </MDBRow>

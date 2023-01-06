@@ -60,3 +60,13 @@
     /* line-height: X;       
     max-height: X*N;       */
 }
+
+.not-found-img {
+    position: relative;
+    bottom: 200px;
+    left: 200px;
+}
+
+.not-found-img img {
+    height: 400px;
+}
