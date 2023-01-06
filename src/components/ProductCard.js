@@ -8,7 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({ products, onAdd, prodOnSearch }) => {
 
-    const getProdOnSearch = products.find(x => x.name == prodOnSearch)
+
+    const getProdOnSearch = products.filter(x =>
+        x.name.toLowerCase().includes(prodOnSearch.toLowerCase())
+    )
 
     const notifyAdded = () => {
         toast.success('Added to Cart!', {
@@ -74,16 +77,18 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
                     )) :
                     (
                         getProdOnSearch &&
-                        <Col style={{ paddingLeft: '25px' }}>
-                            <div className="product-card">
-                                <img className="product-image" src={getProdOnSearch.imagePath} />
-                                <h3 className="product-name overflow-wrap">{getProdOnSearch.name}</h3>
-                                <p className="product-price">${getProdOnSearch.price}</p>
-                                <button className="add-to-cart" onClick={() => onAdd(getProdOnSearch)}>
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </Col>
+                        getProdOnSearch.map(productsFound =>
+                            <Col style={{ paddingLeft: '25px' }}>
+                                <div className="product-card">
+                                    <img className="product-image" src={productsFound.imagePath} />
+                                    <h3 className="product-name overflow-wrap">{productsFound.name}</h3>
+                                    <p className="product-price">${productsFound.price}</p>
+                                    <button className="add-to-cart" onClick={() => onAdd(productsFound)}>
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </Col>
+                        )
                     )
 
             }

@@ -180,6 +180,7 @@ function Products() {
             <button><FaArrowAltCircleLeft></FaArrowAltCircleLeft></button>
             <Cart quantity={quantity} cartItems={cartItems}
                 onRemove={onRemove} onAdd={onAdd} onDecrease={onDecrease}
+                onSetSize={onSetSize}
             />
 
             <br />
