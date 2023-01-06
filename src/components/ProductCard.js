@@ -52,7 +52,16 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
                                 <h3 className="product-name overflow-wrap"
                                 >{item.name}
                                 </h3>
-                                <p className="product-price">${item.price}</p>
+
+                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <p className="product-price" style={{ textDecorationLine: 'line-through' }}>
+                                        ${item.price}
+                                    </p>
+                                    <p className="product-price" style={{ color: 'red' }}>
+                                        ${parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2)}
+                                    </p>
+                                </div>
+
                                 <button className="add-to-cart" onClick={() => {
                                     onAdd(item)
                                     notifyAdded()
