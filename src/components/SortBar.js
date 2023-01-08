@@ -12,7 +12,10 @@ export default function SortBar({ onSelect }) {
     const [sortTerm, setSortTerm] = useState('')
 
     const handleSelect = (event) => {
-        setSortTerm(event)
+        if (event === 'default')
+            window.parent.location = window.parent.location.href;
+        else
+            setSortTerm(event)
     }
 
     useEffect(() => {

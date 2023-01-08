@@ -1,5 +1,6 @@
 import React from 'react';
 import '../style/searchBar.css'
+import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
@@ -39,26 +40,25 @@ function SearchBar({ onSearch }) {
                     },
                 }}
             />
-            <button
+            <Button variant="secondary"
                 type="submit"
                 style={{
                     borderRadius: '4px',
                     border: 'none',
-                    background: '#333',
-                    color: '#fff',
                     padding: '0.5em 1em',
                     fontSize: '1em',
                     cursor: 'pointer',
                     transition: '0.2s',
                     textAlign: 'center',
                     marginLeft: '5px',
+                    marginBottom: '2px',
                     '&:hover': {
                         background: '#444',
                     },
                 }}
             >
                 <FaSearch></FaSearch>
-            </button>
+            </Button>
         </form>
 
     )

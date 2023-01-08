@@ -22,12 +22,14 @@ import Form from 'react-bootstrap/Form';
 
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import '../style/cart.css'
+import { useNavigate } from "react-router-dom";
 
 
 export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease, onSetSize }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const navigator = useNavigate()
 
     var totalCost = 0
     var shippingCost = 40
@@ -140,7 +142,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             <br /><br /> <br />
 
 
-                                                            <Button variant="outline-danger" onClick={() => onDecrease(item)}>
+                                                            <Button style={{ paddingLeft: '13px', paddingRight: '13px' }} variant="outline-danger" onClick={() => onDecrease(item)}>
                                                                 -
                                                             </Button>
                                                             <span style={{ marginLeft: '4px', marginRight: '4px' }}>{item.itemQuantity}</span>
@@ -164,14 +166,6 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                         }
                                     </MDBCard>
 
-                                    {/* <MDBCard className="mb-4">
-                                        <MDBCardBody>
-                                            <p>
-                                                <strong>Expected shipping delivery</strong>
-                                            </p>
-                                            <p className="mb-0">12.10.2020 - 14.10.2020</p>
-                                        </MDBCardBody>
-                                    </MDBCard> */}
                                 </MDBCol>
                                 {
                                     quantity > 0 &&
@@ -210,10 +204,9 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                         </span>
                                                     </MDBListGroupItem>
                                                 </MDBListGroup>
-
-                                                <MDBBtn block>
-                                                    Go to checkout
-                                                </MDBBtn>
+                                                <Button variant="outline-primary">
+                                                    <a href="/payment">Go to checkout</a>
+                                                </Button>
                                             </MDBCardBody>
                                         </MDBCard>
                                     </MDBCol>

@@ -12,7 +12,7 @@ function Navb() {
                     <div class="w3-right w3-hide-small">
                         <a href="/products" class="w3-bar-item w3-button">Products</a>
                         <a href="#about" class="w3-bar-item w3-button">About</a>
-                        <a href="#desc" class="w3-bar-item w3-button">Desc</a>
+                        <a href="#desc" class="w3-bar-item w3-button">Description</a>
                         <a href="#contact" class="w3-bar-item w3-button">Contact</a>
                         <a href="/admin" class="w3-bar-item w3-button" target="_blank">Admin</a>
                     </div>

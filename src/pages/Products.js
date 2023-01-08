@@ -3,7 +3,8 @@ import Cart from "../components/Cart";
 import SearchBar from "../components/SearchBar";
 import ProductCard from "../components/ProductCard";
 import SortBar from "../components/SortBar";
-import { FaArrowAltCircleLeft, FaArrowLeft } from "react-icons/fa";
+import { Button } from "react-bootstrap";
+import { FaArrowAltCircleLeft, FaArrowLeft, FaLongArrowAltLeft } from "react-icons/fa";
 import '../style/products.css'
 
 
@@ -157,7 +158,11 @@ function Products() {
     return (
         <div className="product-page">
             <br />
-            <button><FaArrowAltCircleLeft></FaArrowAltCircleLeft></button>
+            <Button variant="light">
+                <a href="/">
+                    <FaLongArrowAltLeft></FaLongArrowAltLeft>
+                </a>
+            </Button>
             <Cart quantity={quantity} cartItems={cartItems}
                 onRemove={onRemove} onAdd={onAdd} onDecrease={onDecrease}
                 onSetSize={onSetSize}
