@@ -6,7 +6,7 @@ function Description() {
     return (
         <div class="w3-row w3-padding-64" id="home">
             <div class="w3-col l6 w3-padding-large">
-                <h1 class="w3-center">Our Store</h1><br />
+                <h1 class="w3-center">What we sell?</h1><br />
                 <h4>Nike</h4>
                 <p class="w3-text-grey">Nike shoes are lightweight and durable – Despite provides exceptional comfort, flexibility, of Nike shoes are very light.</p><br />
                 <h4>Adidas</h4>
