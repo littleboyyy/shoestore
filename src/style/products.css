@@ -68,3 +68,8 @@
     /* Use a clip-path to hide and show the bits you want */
     clip-path: polygon(0 0, 50% 50%, 100% 0);
 }
+
+.btn-back {
+    position: relative;
+    left: 20px;
+}

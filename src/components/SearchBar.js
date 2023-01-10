@@ -41,6 +41,7 @@ function SearchBar({ onSearch }) {
                 }}
             />
             <Button variant="secondary"
+                title='Find your shoes!'
                 type="submit"
                 style={{
                     borderRadius: '4px',

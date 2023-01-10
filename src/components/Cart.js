@@ -40,6 +40,8 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
         totalCost = totalCost + (parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2) * item.itemQuantity)
     })
 
+    sessionStorage.setItem('totalCost', parseFloat(totalCost + 40).toFixed(2))
+
 
     return (
         <>

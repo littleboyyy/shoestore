@@ -158,7 +158,7 @@ function Products() {
     return (
         <div className="product-page">
             <br />
-            <Button variant="light">
+            <Button variant="light" className="btn-back" title="Back to Home Page">
                 <a href="/">
                     <FaLongArrowAltLeft></FaLongArrowAltLeft>
                 </a>

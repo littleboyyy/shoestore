@@ -3,6 +3,7 @@ import '../style/card.css';
 import { Row, Col, } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import notFoundIMG from '../static/img/not_found_img.png'
 
 
 
@@ -106,7 +107,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
                             )
                             :
                             <div className='not-found-img'>
-                                <img src="https://o.remove.bg/downloads/b9160591-387c-4e3c-9864-eac05b9c5b78/153-1533013_sorry-no-results-found-removebg-preview.png" alt="" />
+                                <img src={notFoundIMG} alt="" />
                             </div>
                     )
 
