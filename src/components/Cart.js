@@ -123,8 +123,13 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             Color:
                                                             <p>{item.color}</p>
                                                             Size:
+                                                            {
+                                                                !item.size &&
+                                                                onSetSize(item, item.sizes[0])
+                                                            }
 
                                                             <Form.Select aria-label="Default select example"
+                                                                value={item.size}
                                                                 onChange={(e) => {
                                                                     onSetSize(item, e.currentTarget.value)
                                                                 }}>
@@ -141,7 +146,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             <Button variant="outline-danger" onClick={() => onRemove(item)}>
                                                                 <FaTrash></FaTrash>
                                                             </Button>
-                                                            <br /><br /> <br />
+                                                            <br /><br />
 
 
                                                             <Button style={{ paddingLeft: '13px', paddingRight: '13px' }} variant="outline-danger" onClick={() => onDecrease(item)}>

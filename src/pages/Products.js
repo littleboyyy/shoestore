@@ -21,8 +21,6 @@ function Products() {
     const [cartItems, setCartItems] = useState(cartFromSession)
     const [products, setProducts] = useState([]);
 
-    const oldProducts = []
-
     useEffect(() => {
         sessionStorage.setItem('cartItems', JSON.stringify(cartItems))
     }, [cartItems])
@@ -52,9 +50,7 @@ function Products() {
         if (products.length > 0) {
             for (let index = 0; index < products.length; index++) {
                 products[index].itemQuantity = 0
-                products[index].size = ''
             }
-            oldProducts = products
         }
     }, [])
 
@@ -182,7 +178,7 @@ function Products() {
 
             <br /><br /><br /><br />
 
-            {console.log(oldProducts)}
+
 
             {
                 sortKey === '' &&
