@@ -1,0 +1,17 @@
+.manage-container {
+    overflow-x: hidden;
+}
+
+/* i:hover {
+    cursor: pointer;
+} */
+
+.search {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid springgreen;
+}
+
+.search:focus {
+    outline: none;
+}

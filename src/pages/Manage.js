@@ -1,33 +1,56 @@
 import React from 'react';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
 function Manage() {
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [products, setProducts] = useState([]);
+
+
+    useEffect(() => {
+        fetch("http://localhost:3000/server/get_all_prod.php")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setProducts(result);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                    console.error('Error calling API')
+                }
+            )
+    }, [])
+    console.log(products)
+
     return (
         <div>
-            <div className="">
+            <div className="manage-container">
                 <div className="row">
                     <div className="vertical-nav bg-white col-2" id="sidebar">
                         <div className="py-4 px-3 mb-4 bg-light text-center">
                             <img src="https://res.cloudinary.com/mhmd/image/upload/v1556074849/avatar-1_tcnd60.png" alt="..."
                                 width="65" className="mr-3 rounded-circle img-thumbnail shadow-sm" />
-                            <h4 className="m-0">Jason Doe</h4>
+                            <h4 className="m-0">Hoang</h4>
                             <p className="font-weight-light text-muted mb-0">Web developer</p>
                             <p className="btn btn-primary font-weight-light btn-sm" id="generate">Generate Data</p>
                         </div>
 
-                        <p className="text-gray font-weight-bold text-uppercase px-3 small pb-3 mb-0 ml-1">Quản Lý</p>
+                        <p className="text-gray font-weight-bold text-uppercase px-3 small pb-3 mb-0 ml-1">Manage</p>
 
                         <ul className="nav flex-column bg-white mb-0 ml-1">
                             <li className="nav-item" id="s_product">
-                                <a href="/admin/product.html" className="nav-link text-dark font-italic bg-light">
+                                <a href="/admin/manage" className="nav-link text-dark font-italic bg-light">
                                     <i className="fa fa-th-large mr-1 text-primary fa-fw"></i>
                                     Product
                                 </a>
                             </li>
 
                             <li className="nav-item" id="s_order">
-                                <a href="/admin/order.html" className="nav-link text-dark font-italic bg-light">
+                                <a href="/admin/order" className="nav-link text-dark font-italic bg-light">
                                     <i className="fa fa-cubes mr-1 text-primary fa-fw"></i>
                                     Order
                                 </a>
@@ -46,14 +69,14 @@ function Manage() {
                                 </div>
                             </div>
                             <div className="text-center mt-2 mb-3">
-                                <h4>Quản Lý Sản Phẩm</h4>
+                                <h4>Product Mangage</h4>
                             </div>
                             <div className="action mb-4">
                                 <div className="frms container" id="form-id">
                                     <div className="form-row">
                                         <div className="form-group col-md-4">
-                                            <label for="code">Code: </label>
-                                            <input type="text" className="form-control" id="code" placeholder="Code" />
+                                            <label for="code">Product ID: </label>
+                                            <input type="text" className="form-control" id="id" placeholder="ID" />
                                         </div>
                                         <div className="form-group col-md-4">
                                             <label for="category">Category: </label>
@@ -113,20 +136,33 @@ function Manage() {
                                         placeholder="Search....." />
                                     <FaSearch></FaSearch>
                                 </div>
-                                <table className="table table-bordered text-center">
+                                <table className="table table-bordered">
                                     <thead className="thead-dark">
                                         <tr>
-                                            <th scope="col">Code</th>
+                                            <th scope="col">ID</th>
 
-                                            <th scope="col">Product</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Brand</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Price</th>
-                                            <th scope="col">Brand</th>
                                             <th scope="col">Amount</th>
-                                            <th scope="col">#</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbody">
+                                        {
+
+                                            products.map(prod =>
+                                                <tr>
+                                                    <th scope="col">{prod.shoeID}</th>
+                                                    <th scope="col">{prod.name}</th>
+                                                    <th scope="col">{prod.brandID}</th>
+                                                    <th scope="col">{prod.categoryID}</th>
+                                                    <th scope="col">{prod.price}</th>
+                                                    <th scope="col">1</th>
+                                                </tr>
+                                            )
+                                        }
+
                                     </tbody>
                                 </table>
                             </div>

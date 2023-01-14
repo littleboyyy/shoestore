@@ -6,6 +6,7 @@ import Products from './pages/Products';
 import Admin from './pages/Admin'
 import Manage from './pages/Manage'
 import Payment from './pages/Payment';
+import Order from './pages/Order';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,6 +21,7 @@ function App() {
       <Route path='/home' element={<Home />} />
       <Route path='/products' element={<Products />} />
       <Route path='/payment' element={<Payment />} />
+      <Route path='/admin/order' element={<Order />} />
 
 
       {
