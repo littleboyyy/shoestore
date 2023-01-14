@@ -61,7 +61,7 @@ function Admin() {
     }
 
     useEffect(() => {
-        fetch("http://localhost:3000/ReviewLab&Exers/TestJson.php")
+        fetch("http://localhost:3000/server/get_admin.php")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -71,7 +71,6 @@ function Admin() {
                 (error) => {
                     setIsLoaded(true);
                     setError(error);
-                    console.log('Loi')
                 }
             )
     }, [])

@@ -19,8 +19,15 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/home' element={<Home />} />
       <Route path='/products' element={<Products />} />
-      <Route path='/admin' element={<Admin />} />
       <Route path='/payment' element={<Payment />} />
+
+
+      {
+        (localStorage.getItem('isValidate') != null && localStorage.getItem('isValidate') === 'true') ?
+          <Route path='/admin' element={<Navigate to='/admin/manage' replace />} />
+          :
+          <Route path='/admin' element={<Admin />} />
+      }
 
 
       {
