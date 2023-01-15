@@ -51,6 +51,10 @@
     background-color: #3d9140;
 }
 
+.add-to-cart:active {
+    transform: scale(0.95);
+}
+
 .overflow-wrap {
     overflow: hidden;
     text-overflow: ellipsis;

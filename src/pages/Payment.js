@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import '../style/payment.css'
 
 function Payment() {
     const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems'))
@@ -52,7 +53,7 @@ function Payment() {
             .then(
                 (data) => console(data)
             )
-            .catch(() => console.error('loi post'))
+            .catch(() => console.error('Error to Post to API!'))
         notifyPaid()
         // setTimeout(() => {
         //     navigator('/')
@@ -61,122 +62,101 @@ function Payment() {
         // window.parent.location = window.parent.location.href
     }
 
-    return (
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        postOrder()
+        sessionStorage.clear()
+    }
 
-        <div className="container">
-            {console.log(isPaid)}
+    return (
+        <div className="payment-page">
+            {
+                console.log(isPaid)
+            }
             {
                 isPaid ?
                     <div>
-                        <h1>Your order has been received!</h1>
+                        <p>Your Order has been recieved!</p>
                         <a href="/products">
-                            <Button variant="primary" onClick={() => setIsPaid(0)}>Continue Shopping</Button>
+                            <Button variant="primary">Continue Shopping</Button>
                         </a>
                     </div>
                     :
-                    <div className="row">
-                        <div className="col-8">
-                            <h4>Purchasing </h4>
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" colspan="2">Items</th>
-                                        <th scope="col">Color</th>
-                                        <th scope="col">Size</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-
-                                <thead>
-                                    {
-                                        cartFromSession.map(item =>
-                                            <tr>
-                                                <th scope="col" colspan="2" style={{ width: '40%' }}><img src={item.imagePath} style={{ width: '20%', height: '10%', }} /></th>
-                                                <th scope="col" style={{ verticalAlign: 'middle' }}>{item.color}</th>
-                                                <th scope="col" style={{ verticalAlign: 'middle' }}>{item.size}</th>
-                                                <th scope="col" style={{ verticalAlign: 'middle' }}>${item.price}</th>
-                                                <th scope="col" style={{ verticalAlign: 'middle' }}>{item.itemQuantity}</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        )
-
-                                    }
-                                </thead>
-
-                                <tbody id="cart-table">
-
-                                </tbody>
-
-                                <tr>
-                                    <td colspan="6">
-                                        Total is : ${sessionStorage.getItem('totalCost')}
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                </tr>
-                            </table>
-                            <div>
-                                <a href="/products">
-                                    <Button variant="primary">Continue Shopping</Button>
-                                </a>
-                            </div>
-
+                    <form onSubmit={handleSubmit}>
+                        <h2>Customer Information</h2>
+                        <div className="form-row">
+                            <label>Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                id='customer-name'
+                                required
+                            />
                         </div>
-                        <div className="col-4">
-                            <div className="pay-info" id="customer-form">
-                                <h3>Delivery</h3>
-                                <div className="form-group">
-                                    <label for="customer-name">Name: </label>
-                                    <input type="text" className="form-control" id="customer-name" placeholder="Name.." />
-                                </div>
-                                <div className="form-group">
-                                    <label for="customer-number">Phone number: </label>
-                                    <input type="text" className="form-control" id="customer-number" placeholder="Phone number.." />
-                                </div>
-                                <div className="form-group">
-                                    <label for="customer-address">Address: </label>
-                                    <input type="text" className="form-control" id="customer-address" placeholder="Address.." />
-                                </div>
-                                <div className="form-group">
-                                    <label for="customer-email">Email: </label>
-                                    <input type="email" className="form-control" id="customer-email" placeholder="Email.." />
-                                </div>
-                                <div className="form-group">
-                                    <label for="customer-note">Note: </label>
-                                    <textarea className="form-control" id="customer-note" rows="3"></textarea>
-                                </div>
-                                <br />
-                                <Button variant="success"
-                                    onClick={() => {
-                                        postOrder()
-                                        sessionStorage.clear()
-                                    }
-
-                                    }>
-                                    Pay
-                                </Button>
-                                <ToastContainer
-                                    position="top-center"
-                                    autoClose={1000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover
-                                    theme="light"
-                                />
-                            </div>
-
+                        <div className="form-row">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                id='customer-email'
+                                required
+                            />
                         </div>
-                    </div>
+                        <div className="form-row">
+                            <label>Address</label>
+                            <input
+                                type="text"
+                                name="address"
+                                id='customer-address'
+                                required
+                            />
+                        </div>
+                        <div className="form-row">
+                            <label>Phone</label>
+                            <input
+                                type="text"
+                                name="phone"
+                                id='customer-number'
+                                required
+                            />
+                        </div>
+                        <h2>Cart Items</h2>
+                        <div className="cart-items">
+                            {cartFromSession.map(item => (
+                                <div key={item.id} className="cart-item">
+                                    <div className="cart-item-img"><img src={item.imagePath} alt="" /></div>
+                                    <div className="cart-item-name">{item.name}</div>
+                                    <div className="cart-item-quantity">Amount:{item.itemQuantity}</div>
+                                    <div className="cart-item-price">
+                                        ${parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2)}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="total-price">Total: ${sessionStorage.getItem('totalCost')}</div>
+                        <button type="submit" id='btn-pay'
+
+                        >Submit Payment</button>
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={1000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                        />
+                        <br />
+                        <a href="/products">
+                            <Button variant="primary">Continue Shopping</Button>
+                        </a>
+                    </form>
             }
-
         </div>
+
     )
 }
 
