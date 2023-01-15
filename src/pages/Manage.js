@@ -48,11 +48,14 @@ function Manage() {
     };
 
     const handleDelete = (id) => {
-        setProducts(products.filter((product) => product.id !== id));
+        let shoeID = new FormData()
+        setProducts(products.filter((product) => product.shoeID !== id));
+        shoeID.append('shoeID', id)
+        axios.post('http://localhost:3000/server/delete_prod.php', shoeID)
     };
 
     const handleUpdate = (id) => {
-        const productToUpdate = products.find((product) => product.id === id);
+        const productToUpdate = products.find((product) => product.shoeID === id);
         setFormData(productToUpdate);
     };
 
@@ -66,7 +69,7 @@ function Manage() {
                         <Form.Control
                             type="text"
                             name="id"
-                            value={formData.id}
+                            value={formData.shoeID}
                             onChange={handleChange}
                         />
                     </Form.Group>
@@ -81,28 +84,40 @@ function Manage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Brand</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="branch"
-                            value={formData.brandID}
-                            onChange={handleChange}
-                        />
+                        <Form.Select aria-label="Default select example">
+                            <option value="DUCA DI MORRONE">DUCA DI MORRONE</option>
+                            <option value="ADIDAS">ADIDAS</option>
+                            <option value="KATE SPADE">KATE SPADE</option>
+                            <option value="KENZO">KENZO</option>
+                            <option value="WHOAU">WHOAU</option>
+                            <option value="SKECHERS">SKECHERS</option>
+                            <option value="MLB KOREA">MLB KOREA</option>
+                        </Form.Select>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Category</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="category"
-                            value={formData.categoryID}
-                            onChange={handleChange}
-                        />
+                        <Form.Select aria-label="Default select example">
+                            <option value="men">men</option>
+                            <option value="women">women</option>
+                            <option value="unisex">unisex</option>
+                            <option value="kid">kid</option>
+                        </Form.Select>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Size</Form.Label>
                         <Form.Control
                             type="text"
                             name="size"
-                            value={formData.size}
+                            value={formData.sizes}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Color</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="color"
+                            value={formData.color}
                             onChange={handleChange}
                         />
                     </Form.Group>
@@ -144,7 +159,9 @@ function Manage() {
 
                     {
                         isUpdate ?
-                            <Button variant="primary" type="submit" className='btn-add-product'>
+                            <Button variant="primary" type="submit" className='btn-add-product'
+                                onClick={() => setIsUpdate(false)}
+                            >
                                 Update
                             </Button>
                             :
@@ -178,12 +195,12 @@ function Manage() {
                                 <td>{product.price}</td>
                                 <td>1</td>
                                 <td>
-                                    <Button variant="danger" onClick={() => handleDelete(product.id)}>
+                                    <Button title='Delete this' variant="danger" onClick={() => handleDelete(product.shoeID)}>
                                         <FaTrash></FaTrash>
                                     </Button>
                                     <Button variant="warning" onClick={() => {
-                                        handleUpdate(product.id)
                                         setIsUpdate(true)
+                                        handleUpdate(product.shoeID)
                                     }}>Update</Button>
                                 </td>
                             </tr>

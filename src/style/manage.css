@@ -48,20 +48,36 @@ h2 {
 
 /* Style the form */
 .manage-page form {
+    width: 70%;
     display: flex;
     flex-wrap: wrap;
+    margin-left: 200px;
     margin-bottom: 20px;
     background-color: white;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #ccc;
 }
 
 /* Style the form inputs */
 .manage-page form input {
-    width: 50%;
+    margin-left: 10px;
+    width: 70%;
     margin-bottom: 10px;
     padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease-in-out;
+}
+
+.manage-page form select {
+    margin-left: 11px;
+    margin-right: 0px;
+    width: 65%;
+    margin-bottom: 10px;
+    padding: 10px;
+    padding-right: 50px;
     font-size: 14px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -82,6 +98,7 @@ h2 {
     margin-right: 10px;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
+    margin-left: 400px;
 }
 
 /* Add hover effect to form buttons */
