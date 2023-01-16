@@ -3,61 +3,60 @@
 require_once("connect_db.php");
 include("functions.php");
 
-$id=$_POST['shoeID'];
+$shoeID=$_POST['shoeID'];
 
-$name=$_POST['name'];
-$brand=$_POST['brand'];
-$category=$_POST['category'];
-$price=$_POST['price'];
-$sale=$_POST['sale'];
-$color=$_POST['color'];
-$imagePath=$_POST['imagePath'];
+if(isset($_POST['name'])) $name=$_POST['name'];
+if(isset($_POST['brand'])) $brand=$_POST['brand'];
+if(isset($_POST['category'])) $category=$_POST['category'];
+if(isset($_POST['price'])) $price=$_POST['price'];
+if(isset($_POST['sale'])) $sale=$_POST['sale'];
+if(isset($_POST['color'])) $color=$_POST['color'];
+if(isset($_POST['imagePath'])) $imagePath=$_POST['imagePath'];
 
-$categoryID= get_cateID($category, $conn);
-$brandID= get_brandID($brand, $conn);
+if(isset($category)) $categoryID= get_cateID($category, $conn);
+if(isset($brand)) $brandID= get_brandID($brand, $conn);
 
 //update edition:
 $k=0;
 $query="UPDATE shoe SET ";
-if($name!=""){
+if(isset($name)){
     $query.="name='$name' ";
     $k++;
 }
-if($brandID!=NULL){
+if(isset($brand)){
     if($k>0) $query.=", ";
     $query.="brandID=$brandID ";
     $k++;
 }
-if($categoryID!=NULL){
+if(isset($categoryID)){
     if($k>0) $query.=", ";
     $query.="categoryID=$categoryID ";
     $k++;
 }
-if($price!=""){
+if(isset($price)){
     if($k>0) $query.=", ";
     $query.="price=$price ";
     $k++;
 }
-if($sale!=""){
+if(isset($sale)){
     if($k>0) $query.=", ";
     $query.="sale=$sale ";
     $k++;
 }
-if($color!=""){
+if(isset($color)){
     if($k>0) $query.=", ";
     $query.="color=$color ";
     $k++;
 }
-if($imagePath!=""){
+if(isset($imagePath)){
     if($k>0) $query.=", ";
     $query.="imagePath=$imagePath ";
     $k++;
 }
-$query.="WHERE shoeID=$id";
+$query.="WHERE shoeID=$shoeID";
 
 $res= mysqli_query($conn,$query);
 if(!$res) die("Failed to excute SQL query: $query<br>");
 
-mysqli_free_result($res);
 mysqli_close($conn);
 ?>
