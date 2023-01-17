@@ -49,7 +49,7 @@ $row=mysqli_fetch_row($res);
 $shoeID=$row[0];
 //them vao:
 if(isset($sizes) && isset($amounts)){
-    update_storage($conn, $shoeID, $size, $amount);
+    update_storage($conn, $shoeID, $sizes, $amounts);
 }
 mysqli_free_result($res);
 mysqli_close($conn);
