@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { FaSearch, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import { Table, Button, Form } from "react-bootstrap";
 import '../style/manage.css'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 function Manage() {
     const [error, setError] = useState(null);
@@ -37,7 +39,6 @@ function Manage() {
                 }
             )
     }, [])
-    console.log(products)
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -165,6 +166,7 @@ function Manage() {
                                 onClick={() => {
                                     setIsUpdate(false)
                                     setIsDisable(false)
+                                    console.log(formData)
                                 }}
                             >
                                 Update
@@ -223,6 +225,8 @@ function Manage() {
                             <th>Product</th>
                             <th>Customer</th>
                             <th>Date</th>
+                            <th>Total Price</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -232,6 +236,18 @@ function Manage() {
                                 <td>{order.product}</td>
                                 <td>{order.customer}</td>
                                 <td>{order.date}</td>
+                                <td>Total</td>
+                                <td>
+                                    <Popup
+                                        trigger={<Button variant="primary">Detail</Button>}
+                                        position="left center"
+                                    >
+                                        <div>
+                                            <p>Popup content</p>
+                                            <button onClick={Popup.close}>Close</button>
+                                        </div>
+                                    </Popup>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

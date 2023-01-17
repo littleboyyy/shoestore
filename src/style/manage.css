@@ -151,7 +151,7 @@ h2 {
 
 /* Add hover effect to 'edit' and 'remove' buttons */
 .manage-page button:hover {
-    background-color: #d32f2f;
+    background-color: #3e8e41;
 }
 
 .manage-page tbody td {
