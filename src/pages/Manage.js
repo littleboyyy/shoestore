@@ -10,6 +10,7 @@ function Manage() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [products, setProducts] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false)
+    const [isDisable, setIsDisable] = useState(false)
 
     const [orders, setOrders] = useState([
         { id: 1, product: "Product 1", customer: "John Doe", date: "01/01/2021" },
@@ -68,9 +69,10 @@ function Manage() {
                         <Form.Label>ID</Form.Label>
                         <Form.Control
                             type="text"
-                            name="id"
+                            name="shoeID"
                             value={formData.shoeID}
                             onChange={handleChange}
+                            disabled={isDisable}
                         />
                     </Form.Group>
                     <Form.Group>
@@ -84,7 +86,7 @@ function Manage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Brand</Form.Label>
-                        <Form.Select aria-label="Default select example">
+                        <Form.Select aria-label="Default select example" className='brand-select'>
                             <option value="DUCA DI MORRONE">DUCA DI MORRONE</option>
                             <option value="ADIDAS">ADIDAS</option>
                             <option value="KATE SPADE">KATE SPADE</option>
@@ -95,8 +97,8 @@ function Manage() {
                         </Form.Select>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Category</Form.Label>
-                        <Form.Select aria-label="Default select example">
+                        <Form.Label className='category-label'>Category</Form.Label>
+                        <Form.Select aria-label="Default select example" className='category-select'>
                             <option value="men">men</option>
                             <option value="women">women</option>
                             <option value="unisex">unisex</option>
@@ -160,7 +162,10 @@ function Manage() {
                     {
                         isUpdate ?
                             <Button variant="primary" type="submit" className='btn-add-product'
-                                onClick={() => setIsUpdate(false)}
+                                onClick={() => {
+                                    setIsUpdate(false)
+                                    setIsDisable(false)
+                                }}
                             >
                                 Update
                             </Button>
@@ -199,6 +204,7 @@ function Manage() {
                                         <FaTrash></FaTrash>
                                     </Button>
                                     <Button variant="warning" onClick={() => {
+                                        setIsDisable(true)
                                         setIsUpdate(true)
                                         handleUpdate(product.shoeID)
                                     }}>Update</Button>
