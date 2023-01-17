@@ -41,10 +41,6 @@ function Admin() {
         });
     }
 
-
-
-
-
     var userValidate = (username, password) => {
         const unameExist = items.find(x => x.uname === username)
         const passwdExist = items.find(y => y.passwd === password)
@@ -95,8 +91,6 @@ function Admin() {
                 <button type="submit" id='btn-login' onClick={() => {
                     var username = document.getElementById('uname').value
                     var psw = document.getElementById('psw').value
-                    console.log(username)
-                    console.log(psw)
                     userValidate(username, psw)
                 }}>Login</button>
 

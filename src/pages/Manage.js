@@ -104,10 +104,10 @@ function Manage() {
                         </Form.Select>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Size</Form.Label>
+                        <Form.Label>Sizes</Form.Label>
                         <Form.Control
                             type="text"
-                            name="size"
+                            name="sizes"
                             value={formData.sizes}
                             onChange={handleChange}
                         />

@@ -6,14 +6,13 @@ import Products from './pages/Products';
 import Admin from './pages/Admin'
 import Manage from './pages/Manage'
 import Payment from './pages/Payment';
-import Order from './pages/Order';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 function App() {
-  const navigate = useNavigate()
 
   return (
     <Routes>
@@ -21,11 +20,12 @@ function App() {
       <Route path='/home' element={<Home />} />
       <Route path='/products' element={<Products />} />
       <Route path='/payment' element={<Payment />} />
-      <Route path='/admin/order' element={<Order />} />
+      <Route path='*' element={<Navigate to='/' />} />
+
 
 
       {
-        (localStorage.getItem('isValidate') != null && localStorage.getItem('isValidate') === 'true') ?
+        (localStorage.getItem('isValidate') === 'true') ?
           <Route path='/admin' element={<Navigate to='/admin/manage' replace />} />
           :
           <Route path='/admin' element={<Admin />} />
@@ -33,10 +33,15 @@ function App() {
 
 
       {
-        (localStorage.getItem('isValidate') != null && localStorage.getItem('isValidate') === 'true') ?
-          <Route path='/admin/manage' element={<Manage />} /> :
+        !localStorage.getItem('isValidate') || localStorage.getItem('isValidate') === 'false' ?
           <Route path='/admin/manage' element={<Navigate to='/admin' replace />} />
+          :
+          <Route path='/admin/manage' element={<Manage />} />
       }
+      {/* {
+        localStorage.getItem('isValidate') === 'true' &&
+     
+      } */}
 
     </Routes>
   )
