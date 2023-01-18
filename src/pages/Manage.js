@@ -14,18 +14,31 @@ function Manage() {
     const [isUpdate, setIsUpdate] = useState(false)
     const [isDisable, setIsDisable] = useState(false)
 
-    const [orders, setOrders] = useState([
-        { id: 1, product: "Product 1", customer: "John Doe", date: "01/01/2021" },
-        { id: 2, product: "Product 2", customer: "Jane Doe", date: "01/02/2021" },
-    ]);
+    const [orders, setOrders] = useState([]);
 
     const [formData, setFormData] = useState({
-        id: "",
-        name: "",
-        price: "",
+        shoeID: ''
     });
+
     useEffect(() => {
-        fetch("http://localhost:3000/server/get_all_prod.php")
+        fetch("http://localhost:3000/server/ad_view_order.php")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setOrders(result);
+                    console.log(orders)
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                    console.error('Error calling API')
+                }
+            )
+    }, [])
+
+    useEffect(() => {
+        fetch("http://localhost:3000/server/ad_view_storage.php")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -40,6 +53,7 @@ function Manage() {
             )
     }, [])
 
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -48,6 +62,39 @@ function Manage() {
         e.preventDefault();
         setProducts([...products, formData]);
     };
+
+    const handleAdd = () => {
+        let formAddProd = new FormData()
+        var sizes = []
+        var amounts = []
+        let sizeCount = 0
+        let amountCount = 0
+        formAddProd.append('name', formData.name)
+        formAddProd.append('brand', formData.brand)
+        formAddProd.append('category', formData.category)
+        formAddProd.append('price', formData.price)
+        formAddProd.append('sale', formData.sale)
+        formAddProd.append('color', formData.color)
+        formAddProd.append('imagePath', formData.imagePath)
+
+        for (let index = 0; index < formData.sizes.length; index = index + 3) {
+            sizes[sizeCount] = formData.sizes.slice(index, index + 2)
+            sizeCount++
+        }
+
+        for (let index = 0; index < formData.amounts.length; index = index + 2) {
+            amounts[amountCount] = formData.amounts.slice(index, index + 1)
+            amountCount++
+        }
+
+        console.log(amounts)
+
+        formAddProd.append('sizes', JSON.stringify(sizes))
+        formAddProd.append('amounts', JSON.stringify(amounts))
+
+        axios.post('http://localhost:3000/server/ad_add_prod.php', formAddProd)
+            .then((data) => console.log(data))
+    }
 
     const handleDelete = (id) => {
         let shoeID = new FormData()
@@ -61,6 +108,8 @@ function Manage() {
         setFormData(productToUpdate);
     };
 
+    // console.log(formData)
+
     return (
         <div className="manage-page">
             <h1>Products Management</h1>
@@ -73,7 +122,7 @@ function Manage() {
                             name="shoeID"
                             value={formData.shoeID}
                             onChange={handleChange}
-                            disabled={isDisable}
+                            disabled={true}
                         />
                     </Form.Group>
                     <Form.Group>
@@ -87,7 +136,11 @@ function Manage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Brand</Form.Label>
-                        <Form.Select aria-label="Default select example" className='brand-select'>
+                        <Form.Select aria-label="Default select example" className='brand-select'
+                            onChange={handleChange}
+                            value={formData.brand}
+                            name="brand"
+                        >
                             <option value="DUCA DI MORRONE">DUCA DI MORRONE</option>
                             <option value="ADIDAS">ADIDAS</option>
                             <option value="KATE SPADE">KATE SPADE</option>
@@ -99,7 +152,11 @@ function Manage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label className='category-label'>Category</Form.Label>
-                        <Form.Select aria-label="Default select example" className='category-select'>
+                        <Form.Select aria-label="Default select example" className='category-select'
+                            onChange={handleChange}
+                            value={formData.category}
+                            name="category"
+                        >
                             <option value="men">men</option>
                             <option value="women">women</option>
                             <option value="unisex">unisex</option>
@@ -146,7 +203,7 @@ function Manage() {
                         <Form.Label>Amount</Form.Label>
                         <Form.Control
                             type="text"
-                            name="amount"
+                            name="amounts"
                             onChange={handleChange}
                         />
                     </Form.Group>
@@ -166,13 +223,15 @@ function Manage() {
                                 onClick={() => {
                                     setIsUpdate(false)
                                     setIsDisable(false)
-                                    console.log(formData)
+
                                 }}
                             >
                                 Update
                             </Button>
                             :
-                            <Button variant="primary" type="submit" className='btn-add-product'>
+                            <Button variant="primary" type="submit" className='btn-add-product'
+                                onClick={() => handleAdd()}
+                            >
                                 Add Product
                             </Button>
                     }
@@ -197,10 +256,10 @@ function Manage() {
                             <tr key={product.shoeID}>
                                 <td>{product.shoeID}</td>
                                 <td>{product.name}</td>
-                                <td>{product.brandID}</td>
-                                <td>{product.categoryID}</td>
+                                <td>{product.brand_name}</td>
+                                <td>{product.cate_name}</td>
                                 <td>{product.price}</td>
-                                <td>1</td>
+                                <td>{product.total_amount}</td>
                                 <td>
                                     <Button title='Delete this' variant="danger" onClick={() => handleDelete(product.shoeID)}>
                                         <FaTrash></FaTrash>
@@ -235,16 +294,23 @@ function Manage() {
                                 <td>{order.id}</td>
                                 <td>{order.product}</td>
                                 <td>{order.customer}</td>
-                                <td>{order.date}</td>
+                                <td>Date</td>
                                 <td>Total</td>
                                 <td>
                                     <Popup
-                                        trigger={<Button variant="primary">Detail</Button>}
+                                        trigger={<Button variant="primary" >
+                                            Detail
+                                        </Button>}
                                         position="left center"
                                     >
                                         <div>
-                                            <p>Popup content</p>
-                                            <button onClick={Popup.close}>Close</button>
+                                            <Button variant="outline-danger" style={{
+                                                position: 'relative',
+                                                left: '160px',
+                                            }}>X</Button>
+                                            <p>{order.date}</p>
+                                            <p>A paragram is a type of verbal play consisting of the alteration of a letter or a series of letters in a word. Adjective: paragrammatic. Also called a textonym.</p>
+
                                         </div>
                                     </Popup>
                                 </td>
