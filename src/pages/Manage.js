@@ -77,16 +77,10 @@ function Manage() {
         formAddProd.append('color', formData.color)
         formAddProd.append('imagePath', formData.imagePath)
 
-        for (let index = 0; index < formData.sizes.length; index = index + 3) {
-            sizes[sizeCount] = formData.sizes.slice(index, index + 2)
-            sizeCount++
-        }
+        sizes = formData.sizes.split(',')
+        amounts = formData.amounts.split(',')
 
-        for (let index = 0; index < formData.amounts.length; index = index + 2) {
-            amounts[amountCount] = formData.amounts.slice(index, index + 1)
-            amountCount++
-        }
-
+        console.log(sizes)
         console.log(amounts)
 
         formAddProd.append('sizes', JSON.stringify(sizes))
