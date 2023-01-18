@@ -12,7 +12,6 @@ function Manage() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [products, setProducts] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false)
-    const [isDisable, setIsDisable] = useState(false)
 
     const [orders, setOrders] = useState([]);
 
@@ -27,7 +26,6 @@ function Manage() {
                 (result) => {
                     setIsLoaded(true);
                     setOrders(result);
-                    console.log(orders)
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -63,10 +61,16 @@ function Manage() {
         setProducts([...products, formData]);
     };
 
+    const formSwap = (form) => {
+
+    }
+
+    console.log(formData)
+
     const handleAdd = () => {
         let formAddProd = new FormData()
-        var sizes = []
-        var amounts = []
+        let sizes = []
+        let amounts = []
         let sizeCount = 0
         let amountCount = 0
         formAddProd.append('name', formData.name)
@@ -79,9 +83,6 @@ function Manage() {
 
         sizes = formData.sizes.split(',')
         amounts = formData.amounts.split(',')
-
-        console.log(sizes)
-        console.log(amounts)
 
         formAddProd.append('sizes', JSON.stringify(sizes))
         formAddProd.append('amounts', JSON.stringify(amounts))
@@ -100,7 +101,25 @@ function Manage() {
     const handleUpdate = (id) => {
         const productToUpdate = products.find((product) => product.shoeID === id);
         setFormData(productToUpdate);
+
+
     };
+
+    const updateAction = (id) => {
+        let formUpdProd = new FormData()
+        const productToUpdate = products.find((product) => product.shoeID === id);
+        for (let keys in productToUpdate) {
+            if (formData[keys] && productToUpdate[keys] !== formData[keys]) {
+                if (keys === 'sizes' || keys === 'amounts') {
+                    let splitKeys = []
+                    splitKeys = formData[keys].split(',')
+                    formUpdProd.append(keys, JSON.stringify(splitKeys))
+                }
+                formUpdProd.append(keys, formData[keys])
+            }
+        }
+        axios.post('http://localhost:3000/server/ad_edit_prod.php', formUpdProd)
+    }
 
     // console.log(formData)
 
@@ -198,6 +217,7 @@ function Manage() {
                         <Form.Control
                             type="text"
                             name="amounts"
+                            value={formData.amounts}
                             onChange={handleChange}
                         />
                     </Form.Group>
@@ -216,15 +236,18 @@ function Manage() {
                             <Button variant="primary" type="submit" className='btn-add-product'
                                 onClick={() => {
                                     setIsUpdate(false)
-                                    setIsDisable(false)
-
+                                    updateAction(formData.shoeID)
+                                    // window.parent.location = window.parent.location.href
                                 }}
                             >
                                 Update
                             </Button>
                             :
                             <Button variant="primary" type="submit" className='btn-add-product'
-                                onClick={() => handleAdd()}
+                                onClick={() => {
+                                    handleAdd()
+                                    window.parent.location = window.parent.location.href
+                                }}
                             >
                                 Add Product
                             </Button>
@@ -250,8 +273,8 @@ function Manage() {
                             <tr key={product.shoeID}>
                                 <td>{product.shoeID}</td>
                                 <td>{product.name}</td>
-                                <td>{product.brand_name}</td>
-                                <td>{product.cate_name}</td>
+                                <td>{product.brand}</td>
+                                <td>{product.category}</td>
                                 <td>{product.price}</td>
                                 <td>{product.total_amount}</td>
                                 <td>
@@ -259,7 +282,6 @@ function Manage() {
                                         <FaTrash></FaTrash>
                                     </Button>
                                     <Button variant="warning" onClick={() => {
-                                        setIsDisable(true)
                                         setIsUpdate(true)
                                         handleUpdate(product.shoeID)
                                     }}>Update</Button>
@@ -275,7 +297,6 @@ function Manage() {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Product</th>
                             <th>Customer</th>
                             <th>Date</th>
                             <th>Total Price</th>
@@ -285,11 +306,10 @@ function Manage() {
                     <tbody>
                         {orders.map((order) => (
                             <tr key={order.id}>
-                                <td>{order.id}</td>
-                                <td>{order.product}</td>
-                                <td>{order.customer}</td>
-                                <td>Date</td>
-                                <td>Total</td>
+                                <td>{order.orderID}</td>
+                                <td>{order.cus_inf.name}</td>
+                                <td>{order.orderDate}</td>
+                                <td>{order.totalMoney}</td>
                                 <td>
                                     <Popup
                                         trigger={<Button variant="primary" >
@@ -298,12 +318,16 @@ function Manage() {
                                         position="left center"
                                     >
                                         <div>
-                                            <Button variant="outline-danger" style={{
-                                                position: 'relative',
-                                                left: '160px',
-                                            }}>X</Button>
-                                            <p>{order.date}</p>
-                                            <p>A paragram is a type of verbal play consisting of the alteration of a letter or a series of letters in a word. Adjective: paragrammatic. Also called a textonym.</p>
+                                            {
+                                                order.detail.map(item =>
+                                                    <div>
+                                                        <p>Item:{item.shoe_name}</p>
+                                                        <p>Size:{item.size}</p>
+                                                        <p>Amount:{item.amount}</p>
+                                                        <p style={{ textAlign: 'center' }}>---------</p>
+                                                    </div>
+                                                )
+                                            }
 
                                         </div>
                                     </Popup>
