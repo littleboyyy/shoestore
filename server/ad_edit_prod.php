@@ -18,10 +18,16 @@ if(isset($_POST['sale'])) $sale=$_POST['sale'];
 if(isset($_POST['color'])) $color=$_POST['color'];
 if(isset($_POST['imagePath'])) $imagePath=$_POST['imagePath'];
 
-if(isset($_POST['sizes']))
-    $sizes= json_decode($_POST['sizes']);
-if(isset($_POST['amounts']))
-    $amounts= json_decode($_POST['amounts']);
+if(isset($_POST['sizes'])) {
+    $sizes=explode(",",$_POST['sizes']);
+    print_r($sizes);
+}
+    //$sizes= json_decode($_POST['sizes']);
+if(isset($_POST['amounts'])) {
+    $amounts=explode(",",$_POST['amounts']);
+    print_r($amounts);
+}
+    //$amounts= json_decode($_POST['amounts']);
 
 if(isset($category)) $categoryID= get_cateID($category, $conn);
 if(isset($brand)) $brandID= get_brandID($brand, $conn);
