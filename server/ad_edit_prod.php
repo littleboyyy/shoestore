@@ -7,32 +7,6 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 require_once("connect_db.php");
 include("functions.php");
 
-function upd_storage($connect, $shoeID, $sizes, $amounts){
-    for($i=0;$i<count($sizes);$i++){
-        $size=$sizes[$i];
-        $amt=$amounts[$i];
-        $sizeID=get_sizeID($connect, $size);
-        if($sizeID == NULL){ //neu chua co size nay trong csdl:
-            //them vao table size:
-            $query = "INSERT INTO size(sval) VALUES ($size)";
-            $res = mysqli_query($connect, $query);
-            if (!$res) die("Failed to excute SQL query: $query<br>");
-            //$sizeID=get_sizeID($connect, $size); 
-
-            $query = "SELECT MAX(sizeID) FROM size";
-            $res = mysqli_query($connect, $query);
-            if (!$res) die("Failed to excute SQL query: $query<br>");
-            $row = mysqli_fetch_row($res);
-            $sizeID = $row[0];                          
-        }
-        $query="UPDATE shoe_storage 
-                SET amount=$amt
-                WHERE shoeID=$shoeID AND sizeID=$sizeID;";            
-        //update vao shoe_storage:
-        $res = mysqli_query($connect, $query);
-        if (!$res) die("Failed to excute SQL query: $query<br>");
-    }
-}
 //sửa thông tin về shoe
 if(isset($_POST['shoeID'])) $shoeID=$_POST['shoeID'];
 
@@ -57,6 +31,10 @@ if(isset($_POST['amounts'])) {
 
 if(isset($category)) $categoryID= get_cateID($category, $conn);
 if(isset($brand)) $brandID= get_brandID($brand, $conn);
+
+if(isset($sizes) && isset($amounts)){
+    update_storage($conn, $shoeID, $sizes, $amounts);
+}
 
 //update edition:
 $k=0;
@@ -96,11 +74,8 @@ if(isset($imagePath)){
     $k++;
 }
 $query.="WHERE shoeID=$shoeID";
-
-$res= mysqli_query($conn,$query);
-if(!$res) die("Failed to excute SQL query: $query<br>");
-
-if(isset($sizes) && isset($amounts)){
-    upd_storage($conn, $shoeID, $sizes, $amounts);
+if($k>0){
+    $res= mysqli_query($conn,$query);
+    if(!$res) die("Failed to excute SQL query: $query<br>");
 }
 mysqli_close($conn);
