@@ -4,11 +4,37 @@ header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
-//sửa thông tin về shoe
 require_once("connect_db.php");
 include("functions.php");
 
-$shoeID=$_POST['shoeID'];
+function upd_storage($connect, $shoeID, $sizes, $amounts){
+    for($i=0;$i<count($sizes);$i++){
+        $size=$sizes[$i];
+        $amt=$amounts[$i];
+        $sizeID=get_sizeID($connect, $size);
+        if($sizeID == NULL){ //neu chua co size nay trong csdl:
+            //them vao table size:
+            $query = "INSERT INTO size(sval) VALUES ($size)";
+            $res = mysqli_query($connect, $query);
+            if (!$res) die("Failed to excute SQL query: $query<br>");
+            //$sizeID=get_sizeID($connect, $size); 
+
+            $query = "SELECT MAX(sizeID) FROM size";
+            $res = mysqli_query($connect, $query);
+            if (!$res) die("Failed to excute SQL query: $query<br>");
+            $row = mysqli_fetch_row($res);
+            $sizeID = $row[0];                          
+        }
+        $query="UPDATE shoe_storage 
+                SET amount=$amt
+                WHERE shoeID=$shoeID AND sizeID=$sizeID;";            
+        //update vao shoe_storage:
+        $res = mysqli_query($connect, $query);
+        if (!$res) die("Failed to excute SQL query: $query<br>");
+    }
+}
+//sửa thông tin về shoe
+if(isset($_POST['shoeID'])) $shoeID=$_POST['shoeID'];
 
 if(isset($_POST['name'])) $name=$_POST['name'];
 if(isset($_POST['brand'])) $brand=$_POST['brand'];
@@ -20,12 +46,12 @@ if(isset($_POST['imagePath'])) $imagePath=$_POST['imagePath'];
 
 if(isset($_POST['sizes'])) {
     $sizes=explode(",",$_POST['sizes']);
-    print_r($sizes);
+    //print_r($sizes);
 }
     //$sizes= json_decode($_POST['sizes']);
 if(isset($_POST['amounts'])) {
     $amounts=explode(",",$_POST['amounts']);
-    print_r($amounts);
+    //print_r($amounts);
 }
     //$amounts= json_decode($_POST['amounts']);
 
@@ -75,7 +101,6 @@ $res= mysqli_query($conn,$query);
 if(!$res) die("Failed to excute SQL query: $query<br>");
 
 if(isset($sizes) && isset($amounts)){
-    update_storage($conn, $shoeID, $sizes, $amounts);
+    upd_storage($conn, $shoeID, $sizes, $amounts);
 }
 mysqli_close($conn);
-?>
