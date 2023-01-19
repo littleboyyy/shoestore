@@ -29,6 +29,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [disabled, setDisable] = useState(false)
     const navigator = useNavigate()
 
     var totalCost = 0
@@ -125,7 +126,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             Size:
                                                             {
                                                                 !item.size &&
-                                                                onSetSize(item, item.sizes[0])
+                                                                onSetSize(item, item.detail[0].size)
                                                             }
 
                                                             <Form.Select aria-label="Default select example"
@@ -134,8 +135,8 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                                     onSetSize(item, e.currentTarget.value)
                                                                 }}>
                                                                 {
-                                                                    item.sizes.map(size =>
-                                                                        <option value={size}>{size} </option>
+                                                                    item.detail.map(detail =>
+                                                                        <option value={detail.size}>{detail.size} </option>
                                                                     )
                                                                 }
                                                             </Form.Select>
@@ -152,8 +153,11 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             <Button style={{ paddingLeft: '13px', paddingRight: '13px' }} variant="outline-danger" onClick={() => onDecrease(item)}>
                                                                 -
                                                             </Button>
+                                                            {/* {
+                                                                item.itemQuantity > item.detail[item.size].amount && setDisable(true)
+                                                            } */}
                                                             <span style={{ marginLeft: '4px', marginRight: '4px' }}>{item.itemQuantity}</span>
-                                                            <Button variant="outline-success" onClick={() => onAdd(item)}>
+                                                            <Button variant="outline-success" onClick={() => onAdd(item)} disabled={disabled}>
                                                                 +
                                                             </Button>
 

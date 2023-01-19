@@ -58,12 +58,7 @@ function Manage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setProducts([...products, formData]);
     };
-
-    const formSwap = (form) => {
-
-    }
 
     console.log(formData)
 
@@ -108,17 +103,22 @@ function Manage() {
     const updateAction = (id) => {
         let formUpdProd = new FormData()
         const productToUpdate = products.find((product) => product.shoeID === id);
+        formUpdProd.append('shoeID', id)
         for (let keys in productToUpdate) {
             if (formData[keys] && productToUpdate[keys] !== formData[keys]) {
-                if (keys === 'sizes' || keys === 'amounts') {
-                    let splitKeys = []
-                    splitKeys = formData[keys].split(',')
-                    formUpdProd.append(keys, JSON.stringify(splitKeys))
-                }
+                // if (keys === 'sizes' || keys === 'amounts') {
+                //     let splitKeys = []
+                //     splitKeys = formData[keys].split(',')
+                //     console.log(splitKeys)
+                //     formUpdProd.append(keys, JSON.stringify(splitKeys))
+                // }
                 formUpdProd.append(keys, formData[keys])
+                console.log(formUpdProd.get(keys))
             }
         }
-        axios.post('http://localhost:3000/server/ad_edit_prod.php', formUpdProd)
+
+        // axios.post('http://localhost:3000/server/ad_edit_prod.php', formUpdProd)
+        //     .then((data) => console.log(data))
     }
 
     // console.log(formData)

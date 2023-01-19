@@ -17,6 +17,7 @@ if(isset($_POST['price'])) $price=$_POST['price'];
 if(isset($_POST['sale'])) $sale=$_POST['sale'];
 if(isset($_POST['color'])) $color=$_POST['color'];
 if(isset($_POST['imagePath'])) $imagePath=$_POST['imagePath'];
+
 if(isset($_POST['sizes']))
     $sizes= json_decode($_POST['sizes']);
 if(isset($_POST['amounts']))
@@ -54,12 +55,12 @@ if(isset($sale)){
 }
 if(isset($color)){
     if($k>0) $query.=", ";
-    $query.="color=$color ";
+    $query.="color='$color' ";
     $k++;
 }
 if(isset($imagePath)){
     if($k>0) $query.=", ";
-    $query.="imagePath=$imagePath ";
+    $query.="imagePath='$imagePath' ";
     $k++;
 }
 $query.="WHERE shoeID=$shoeID";
@@ -71,4 +72,3 @@ if(isset($sizes) && isset($amounts)){
     update_storage($conn, $shoeID, $sizes, $amounts);
 }
 mysqli_close($conn);
-?>

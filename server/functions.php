@@ -51,7 +51,7 @@ function update_storage($connect, $shoeID, $sizes, $amounts){
         }
         else if($ret==1){
             $query="UPDATE shoe_storage 
-                SET amount=amount+$amt
+                SET amount=$amt
                 WHERE shoeID=$shoeID AND sizeID=$sizeID";
         }
         //update vao shoe_storage:
@@ -77,4 +77,3 @@ function get_customerID($cus_name, $connect){
     $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
     return $rows;
 }*/
-?>
