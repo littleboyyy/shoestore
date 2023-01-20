@@ -48,10 +48,10 @@ function Admin() {
         if (unameExist && passwdExist) {
             localStorage.setItem('isValidate', true)
             notifyLoginSuccess()
-            navigate('/admin/manage')
         }
         else {
-            notifyLoginFail()
+            // notifyLoginFail()
+            alert('Wrong username or password!')
             localStorage.setItem('isValidate', false)
         }
     }
@@ -88,11 +88,14 @@ function Admin() {
                 <input type="password" placeholder="Password" name='psw' id='psw' required />
                 <br /><br />
 
-                <button type="submit" id='btn-login' onClick={() => {
-                    var username = document.getElementById('uname').value
-                    var psw = document.getElementById('psw').value
-                    userValidate(username, psw)
-                }}>Login</button>
+
+                <a href="/admin/manage" id='tag-to-manage' >
+                    <button type="submit" id='btn-login' onClick={() => {
+                        var username = document.getElementById('uname').value
+                        var psw = document.getElementById('psw').value
+                        userValidate(username, psw)
+                    }}>Login</button>
+                </a>
 
                 <ToastContainer
                     position="top-center"

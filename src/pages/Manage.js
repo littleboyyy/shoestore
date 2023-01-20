@@ -110,15 +110,15 @@ function Manage() {
                 //     let splitKeys = []
                 //     splitKeys = formData[keys].split(',')
                 //     console.log(splitKeys)
-                //     formUpdProd.append(keys, JSON.stringify(splitKeys))
+                //     formUpdProd.append(keys, JSON.stringify(formData[keys]))
                 // }
                 formUpdProd.append(keys, formData[keys])
                 console.log(formUpdProd.get(keys))
             }
         }
 
-        // axios.post('http://localhost:3000/server/ad_edit_prod.php', formUpdProd)
-        //     .then((data) => console.log(data))
+        axios.post('http://localhost:3000/server/ad_edit_prod.php', formUpdProd)
+            .then((data) => console.log(data))
     }
 
     // console.log(formData)
@@ -237,7 +237,7 @@ function Manage() {
                                 onClick={() => {
                                     setIsUpdate(false)
                                     updateAction(formData.shoeID)
-                                    // window.parent.location = window.parent.location.href
+                                    window.parent.location = window.parent.location.href
                                 }}
                             >
                                 Update

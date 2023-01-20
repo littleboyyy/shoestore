@@ -16,32 +16,20 @@ function App() {
 
   return (
     <Routes>
+      <Route path='*' element={<Navigate to='/' />} />
       <Route path='/' element={<Home />} />
       <Route path='/home' element={<Home />} />
       <Route path='/products' element={<Products />} />
       <Route path='/payment' element={<Payment />} />
-      <Route path='*' element={<Navigate to='/' />} />
-
-
+      <Route path='/admin' element={<Admin />} />
 
       {
-        (localStorage.getItem('isValidate') === 'true') ?
-          <Route path='/admin' element={<Navigate to='/admin/manage' replace />} />
-          :
-          <Route path='/admin' element={<Admin />} />
+        (localStorage.getItem('isValidate') === null || localStorage.getItem('isValidate') === 'false') &&
+        <Route path='/admin/manage' element={<Navigate to='/admin' replace />} />
       }
 
+      <Route path='/admin/manage' element={<Manage />} />
 
-      {
-        !localStorage.getItem('isValidate') || localStorage.getItem('isValidate') === 'false' ?
-          <Route path='/admin/manage' element={<Navigate to='/admin' replace />} />
-          :
-          <Route path='/admin/manage' element={<Manage />} />
-      }
-      {/* {
-        localStorage.getItem('isValidate') === 'true' &&
-     
-      } */}
 
     </Routes>
   )
