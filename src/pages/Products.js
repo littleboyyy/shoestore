@@ -161,7 +161,7 @@ function Products() {
             </Button>
             <Cart quantity={quantity} cartItems={cartItems}
                 onRemove={onRemove} onAdd={onAdd} onDecrease={onDecrease}
-                onSetSize={onSetSize}
+                onSetSize={onSetSize} setCartItems={setCartItems}
             />
 
             <br />
@@ -181,19 +181,19 @@ function Products() {
 
 
             {
-                sortKey === '' &&
-                <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />
+                (sortKey === '' &&
+                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
                 ||
-                sortKey === 'default' &&
-                <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />
+                (sortKey === 'default' &&
+                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
             }
 
             {
-                sortKey === 'increase' && products.sort((a, b) => increaseSort(a, b)) &&
-                <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />
+                (sortKey === 'increase' && products.sort((a, b) => increaseSort(a, b)) &&
+                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
                 ||
-                sortKey === 'decrease' && products.sort((a, b) => decreaseSort(a, b)) &&
-                <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />
+                (sortKey === 'decrease' && products.sort((a, b) => decreaseSort(a, b)) &&
+                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
             }
         </div>
     )

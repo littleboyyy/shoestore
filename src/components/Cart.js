@@ -25,11 +25,10 @@ import '../style/cart.css'
 import { useNavigate } from "react-router-dom";
 
 
-export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease, onSetSize }) {
+export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease, onSetSize, setCartItems }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [disabled, setDisable] = useState(false)
     const navigator = useNavigate()
 
     var totalCost = 0
@@ -133,6 +132,10 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                                 value={item.size}
                                                                 onChange={(e) => {
                                                                     onSetSize(item, e.currentTarget.value)
+                                                                    const exist = cartItems.find(x => x.name === item.name)
+                                                                    setCartItems(cartItems.map(x => x.name === item.name ? {
+                                                                        ...exist, itemQuantity: 1
+                                                                    } : x))
                                                                 }}>
                                                                 {
                                                                     item.detail.map(detail =>
@@ -140,24 +143,37 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                                     )
                                                                 }
                                                             </Form.Select>
-
+                                                            <br />
+                                                            <p>Items left: {item.detail.find(x => x.size === item.size).amount}</p>
 
                                                             <br />
 
                                                             <Button variant="outline-danger" onClick={() => onRemove(item)}>
                                                                 <FaTrash></FaTrash>
                                                             </Button>
+
                                                             <br /><br />
 
 
                                                             <Button style={{ paddingLeft: '13px', paddingRight: '13px' }} variant="outline-danger" onClick={() => onDecrease(item)}>
                                                                 -
                                                             </Button>
+
+
                                                             {/* {
-                                                                item.itemQuantity > item.detail[item.size].amount && setDisable(true)
+                                                                (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) &&
+                                                                setCartItems([...cartItems, { ...item, itemQuantity: 1 }])
                                                             } */}
                                                             <span style={{ marginLeft: '4px', marginRight: '4px' }}>{item.itemQuantity}</span>
-                                                            <Button variant="outline-success" onClick={() => onAdd(item)} disabled={disabled}>
+                                                            <Button variant="outline-success" onClick={() => {
+                                                                onAdd(item)
+                                                                const exist = cartItems.find(x => x.name === item.name)
+                                                                if (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) {
+                                                                    setCartItems(cartItems.map(x => x.name === item.name ? {
+                                                                        ...exist, itemQuantity: 1
+                                                                    } : x))
+                                                                }
+                                                            }} >
                                                                 +
                                                             </Button>
 
