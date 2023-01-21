@@ -14,7 +14,7 @@ function Contact() {
                         style={{ backgroundColor: '#3b5998' }}
                         href="#!"
                         role="button"
-
+                        title='Facebook'
                     >
                         <FaFacebook></FaFacebook>
                     </a>
@@ -25,6 +25,7 @@ function Contact() {
                         style={{ backgroundColor: '#55acee' }}
                         href="#!"
                         role="button"
+                        title='Twitter'
                     >
                         <FaTwitter></FaTwitter>
                     </a>
@@ -35,6 +36,7 @@ function Contact() {
                         style={{ backgroundColor: '#ac2bac' }}
                         href="#!"
                         role="button"
+                        title='Instagram'
                     >
                         <FaInstagram></FaInstagram>
                     </a>
@@ -45,6 +47,7 @@ function Contact() {
                         style={{ backgroundColor: '#0082ca' }}
                         href="#!"
                         role="button"
+                        title='LinkedIn'
                     >
                         <FaLinkedin></FaLinkedin>
                     </a>
@@ -52,8 +55,10 @@ function Contact() {
                     <a
                         class="btn text-white btn-floating m-1"
                         style={{ backgroundColor: '#333333' }}
-                        href="#!"
+                        href="https://github.com/leduochoang2001"
                         role="button"
+                        target="_blank"
+                        title='Github'
                     >
                         <FaGithub></FaGithub>
                     </a>
