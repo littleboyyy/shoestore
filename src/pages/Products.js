@@ -194,6 +194,21 @@ function Products() {
                 ||
                 (sortKey === 'decrease' && products.sort((a, b) => decreaseSort(a, b)) &&
                     <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
+                ||
+                (sortKey === 'adidas') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Adidas'))} prodOnSearch={searchResults} />
+                ||
+                (sortKey === 'ducadi') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Duca Di'))} prodOnSearch={searchResults} />
+                ||
+                (sortKey === 'kate') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Kate'))} prodOnSearch={searchResults} />
+                ||
+                (sortKey === 'mlb') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('MLB'))} prodOnSearch={searchResults} />
+                ||
+                (sortKey === 'whoau') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('WHOAU'))} prodOnSearch={searchResults} />
             }
         </div>
     )
