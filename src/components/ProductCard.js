@@ -46,7 +46,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
             {
                 prodOnSearch === '' ?
                     products.map(item => (
-                        <Col style={{ padding: '50px' }}>
+                        <Col style={{ padding: '50px' }} xs='3'>
                             <div className="product-card">
                                 <img className="product-image" src={item.imagePath} />
                                 <h3 className="product-name overflow-wrap"

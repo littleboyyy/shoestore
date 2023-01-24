@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import '../style/payment.css'
 
+const checkmarkImg = require('../static/img/green-checkmark-icon.png')
+
 function Payment() {
     const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems'))
     const navigator = useNavigate()
@@ -75,8 +77,9 @@ function Payment() {
             }
             {
                 isPaid ?
-                    <div>
-                        <p>Your Order has been recieved!</p>
+                    <div style={{ textAlign: 'center' }}>
+                        <p><img src={checkmarkImg} alt="" style={{ width: '10%', height: '50%' }} /></p>
+                        <p>Your order has been recieved!</p>
                         <a href="/products">
                             <Button variant="primary">Continue Shopping</Button>
                         </a>

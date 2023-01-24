@@ -1,8 +1,5 @@
 import React from 'react';
 
-const aboutImg = require('../static/img/aboutus.jpg')
-
-
 
 function About() {
     return (
@@ -15,6 +12,7 @@ function About() {
                 <h1 class="w3-center">About Us</h1><br />
                 <h5 class="w3-center">We are Husters!</h5>
                 <p class="w3-large">Our team is from hust university, we sell sports shoes of brands such as Nike, Adidas, MLB, etc.. Hope you have the best experience with our products.</p>
+
             </div>
         </div>
 
