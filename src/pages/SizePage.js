@@ -1,10 +1,11 @@
 import React from 'react';
+import size_chart from '../static/img/Size_Chart.jpg'
 
 function SizePage() {
     return (
         <div style={{ textAlign: 'center' }}>
             <h1>Shoe Size Chart</h1>
-            <img src="https://cdn.shopify.com/s/files/1/0298/1570/1557/files/AKU_Size_Chart.jpg?v=1592780553" alt="" />
+            <img src={size_chart} alt="size chart" />
         </div>
 
     )
