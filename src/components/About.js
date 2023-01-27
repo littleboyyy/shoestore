@@ -1,11 +1,12 @@
 import React from 'react';
+const aboutUsImg = require('../static/img/about-us-page.jpg')
 
 
 function About() {
     return (
         <div class="w3-row w3-padding-64" id="about">
             <div class="w3-col m6 w3-padding-large w3-hide-small">
-                <img src="https://1.bp.blogspot.com/-BfWd1PKPNJM/YL8Ucuy3nvI/AAAAAAAABmQ/fTMHpyQZbiQg0R_mqKTKtlUHlO6nDRoagCLcBGAsYHQ/s1275/Screenshot%2Bfrom%2B2021-06-08%2B13-55-17.png" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750" />
+                <img src={aboutUsImg} class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750" />
             </div>
 
             <div class="w3-col m6 w3-padding-large">
