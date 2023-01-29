@@ -96,6 +96,12 @@ function Products() {
             setCartItems(cartItems.map(x => x.name === item.name ? {
                 ...exist, itemQuantity: exist.itemQuantity + 1
             } : x))
+
+            // if (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) {
+            //     setCartItems(cartItems.map(x => x.name === item.name ? {
+            //         ...exist, itemQuantity: 1
+            //     } : x))
+            // }
         }
         else {
             setQuantity(quantity + 1)

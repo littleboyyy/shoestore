@@ -34,6 +34,16 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
     var totalCost = 0
     var shippingCost = 40
 
+    //limit the quantity of each size of products
+    const limitAdding = (item) => {
+        const exist = cartItems.find(x => x.name === item.name)
+        if (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) {
+            setCartItems(cartItems.map(x => x.name === item.name ? {
+                ...exist, itemQuantity: 1
+            } : x))
+        }
+    }
+
 
 
     cartItems.forEach(item => {
@@ -167,12 +177,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             <span style={{ marginLeft: '4px', marginRight: '4px' }}>{item.itemQuantity}</span>
                                                             <Button variant="outline-success" onClick={() => {
                                                                 onAdd(item)
-                                                                const exist = cartItems.find(x => x.name === item.name)
-                                                                if (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) {
-                                                                    setCartItems(cartItems.map(x => x.name === item.name ? {
-                                                                        ...exist, itemQuantity: 1
-                                                                    } : x))
-                                                                }
+                                                                limitAdding(item)
                                                             }} >
                                                                 +
                                                             </Button>

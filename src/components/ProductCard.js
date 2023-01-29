@@ -99,9 +99,24 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
                                                 ${parseFloat(productsFound.price - (productsFound.price * productsFound.sale / 100)).toFixed(2)}
                                             </p>
                                         </div>
-                                        <button className="add-to-cart" onClick={() => onAdd(productsFound)}>
+                                        <button className="add-to-cart" onClick={() => {
+                                            onAdd(productsFound)
+                                            notifyAdded()
+                                        }}>
                                             Add to Cart
                                         </button>
+                                        <ToastContainer
+                                            position="top-right"
+                                            autoClose={5000}
+                                            hideProgressBar={false}
+                                            newestOnTop={false}
+                                            closeOnClick
+                                            rtl={false}
+                                            pauseOnFocusLoss
+                                            draggable
+                                            pauseOnHover
+                                            theme="colored"
+                                        />
                                     </div>
                                 </Col>
                             )
