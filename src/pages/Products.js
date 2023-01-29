@@ -133,19 +133,6 @@ function Products() {
             setCartItems(cartItems.filter(x => x.name !== item.name))
     }
 
-
-
-
-    // //Set item's color 
-
-    // const onSetColor = (item, color) => {
-    //     const exist = cartItems.find(x => x.name === item.name)
-    //     exist.color = color
-    //     setCartItems(cartItems.map(x => x.name === item.name ? {
-    //         ...exist, color: exist.color
-    //     } : x))
-    // }
-
     //Set item's size
 
     const onSetSize = (item, size) => {
@@ -188,33 +175,42 @@ function Products() {
 
             {
                 (sortKey === '' &&
-                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
+                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults}
+                        cartItems={cartItems} setCartItems={setCartItems} />)
                 ||
                 (sortKey === 'default' &&
-                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
+                    <ProductCard onAdd={onAdd} products={products}
+                        prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />)
             }
 
             {
                 (sortKey === 'increase' && products.sort((a, b) => increaseSort(a, b)) &&
-                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
+                    <ProductCard onAdd={onAdd} products={products}
+                        prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />)
                 ||
                 (sortKey === 'decrease' && products.sort((a, b) => decreaseSort(a, b)) &&
-                    <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults} />)
+                    <ProductCard onAdd={onAdd} products={products}
+                        prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />)
                 ||
                 (sortKey === 'adidas') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Adidas'))} prodOnSearch={searchResults} />
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Adidas'))}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
                 ||
                 (sortKey === 'ducadi') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Duca Di'))} prodOnSearch={searchResults} />
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Duca Di'))}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
                 ||
                 (sortKey === 'kate') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Kate'))} prodOnSearch={searchResults} />
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Kate'))}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
                 ||
                 (sortKey === 'mlb') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('MLB'))} prodOnSearch={searchResults} />
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('MLB'))}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
                 ||
                 (sortKey === 'whoau') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('WHOAU'))} prodOnSearch={searchResults} />
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('WHOAU'))}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
             }
         </div>
     )

@@ -130,9 +130,8 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             <p>
                                                                 <strong>{item.name}</strong>
                                                             </p>
-                                                            Color:
-                                                            <p>{item.color}</p>
-                                                            Size:
+                                                            <p><strong>Color:</strong> {item.color}</p>
+                                                            <strong>Size:</strong>
                                                             {
                                                                 !item.size &&
                                                                 onSetSize(item, item.detail[0].size)
@@ -154,7 +153,8 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                                 }
                                                             </Form.Select>
                                                             <br />
-                                                            <p>Items left: {item.detail.find(x => x.size === item.size).amount}</p>
+
+                                                            <p><strong>Items left:</strong> {item.detail.find(x => x.size === item.size).amount}</p>
 
                                                             <br />
 
@@ -169,12 +169,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                                 -
                                                             </Button>
 
-
-                                                            {/* {
-                                                                (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) &&
-                                                                setCartItems([...cartItems, { ...item, itemQuantity: 1 }])
-                                                            } */}
-                                                            <span style={{ marginLeft: '4px', marginRight: '4px' }}>{item.itemQuantity}</span>
+                                                            <span style={{ marginLeft: '3px', marginRight: '3px' }}>{item.itemQuantity}</span>
                                                             <Button variant="outline-success" onClick={() => {
                                                                 onAdd(item)
                                                                 limitAdding(item)

@@ -7,12 +7,21 @@ import notFoundIMG from '../static/img/not_found_img.png'
 
 
 
-const ProductCard = ({ products, onAdd, prodOnSearch }) => {
+const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems }) => {
 
 
     const getProdOnSearch = products.filter(x =>
         x.name.toLowerCase().includes(prodOnSearch.toLowerCase())
     )
+
+    const limitAdding = (item) => {
+        const exist = cartItems.find(x => x.name === item.name)
+        if (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) {
+            setCartItems(cartItems.map(x => x.name === item.name ? {
+                ...exist, itemQuantity: 1
+            } : x))
+        }
+    }
 
     const notifyAdded = () => {
         toast.success('Added to Cart!', {
@@ -65,6 +74,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
                                 <button className="add-to-cart" onClick={() => {
                                     onAdd(item)
                                     notifyAdded()
+                                    limitAdding(item)
                                 }}>
                                     Add to Cart
                                 </button>
