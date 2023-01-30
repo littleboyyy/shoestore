@@ -16,7 +16,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
 
     const limitAdding = (item) => {
         const exist = cartItems.find(x => x.name === item.name)
-        if (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) {
+        if (exist.itemQuantity === parseInt(item.detail.find(x => x.size === exist.size).amount)) {
             setCartItems(cartItems.map(x => x.name === item.name ? {
                 ...exist, itemQuantity: 1
             } : x))
