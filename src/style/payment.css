@@ -143,3 +143,27 @@ h2 {
     left: 250px;
     bottom: 38px;
 }
+
+.COD-checkbox {
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: right;
+    margin-right: 10px;
+    position: relative;
+    bottom: 70px;
+}
+
+.COD-checkbox input {
+    -ms-transform: scale(2);
+    /* IE */
+    -moz-transform: scale(2);
+    /* FF */
+    -webkit-transform: scale(2);
+    /* Safari and Chrome */
+    -o-transform: scale(2);
+    /* Opera */
+    transform: scale(2);
+    padding: 10px;
+    margin-right: 7px;
+    accent-color: green;
+}

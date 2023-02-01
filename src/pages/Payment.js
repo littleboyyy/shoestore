@@ -11,11 +11,12 @@ const checkmarkImg = require('../static/img/green-checkmark-icon.png')
 
 function Payment() {
     const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems'))
-    const navigator = useNavigate()
     const [isPaid, setIsPaid] = useState(0)
     const [totalCost, setTotalCost] = useState(sessionStorage.getItem('totalCost'))
     const [getVoucher, setGetVoucher] = useState('')
     const [disable, setDisable] = useState(false)
+    const [isCOD, setIsCOD] = useState(false)
+
     const notifyPaid = () => {
         toast.success('You have ordered!', {
             position: "top-center",
@@ -32,7 +33,7 @@ function Payment() {
     const notifyApplyVoucher = () => {
         toast.success('You have applied a voucher -20$ !', {
             position: "top-center",
-            autoClose: 1000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
@@ -54,6 +55,17 @@ function Payment() {
             alert('Voucher not found!')
         }
     }
+
+    const handleCheckBox = (e) => {
+        if (e.target.checked) {
+            setIsCOD(true)
+        }
+        else {
+            setIsCOD(false)
+        }
+    }
+
+    console.log(isCOD)
 
 
     const postOrder = () => {
@@ -103,9 +115,6 @@ function Payment() {
     return (
         <div className="payment-page">
             {
-                console.log(isPaid)
-            }
-            {
                 isPaid ?
                     <div style={{ textAlign: 'center' }}>
                         <p><img src={checkmarkImg} alt="" style={{ width: '10%', height: '50%' }} /></p>
@@ -143,6 +152,7 @@ function Payment() {
                                 type="text"
                                 name="address"
                                 id='customer-address'
+                                placeholder='Address'
                                 required
                             />
                         </div>
@@ -152,47 +162,55 @@ function Payment() {
                                 type="text"
                                 name="phone"
                                 id='customer-number'
+                                placeholder='Phone'
                                 required
                             />
                         </div>
 
-                        <div className="form-row">
-                            <label>Card Number</label>
-                            <input
-                                type="text"
-                                name="card-number"
-                                id="card-number"
-                                required
-                            />
-                        </div>
-                        <div className="form-row">
-                            <label>Cardholder's Name:</label>
-                            <input
-                                type="text"
-                                name="card-holder-name"
-                                id="card-holder-name"
-                                required
-                            />
-                        </div>
-                        <div className="form-row">
-                            <label>Expiration</label>
-                            <input
-                                type="text"
-                                name="expiration"
-                                id='expiration'
-                                required
-                            />
-                        </div>
-                        <div className="form-row">
-                            <label>CVV</label>
-                            <input
-                                type="password"
-                                name="cvv"
-                                id='cvv'
-                                required
-                            />
-                        </div>
-
+                        {
+                            !isCOD &&
+                            <div>
+                                <div className="form-row">
+                                    <label>Card Number</label>
+                                    <input
+                                        type="text"
+                                        name="card-number"
+                                        id="card-number"
+                                        placeholder='Card Number'
+                                        required
+                                    />
+                                </div>
+                                <div className="form-row">
+                                    <label>Cardholder's Name:</label>
+                                    <input
+                                        type="text"
+                                        name="card-holder-name"
+                                        placeholder="Cardholder's Name"
+                                        id="card-holder-name"
+                                        required
+                                    />
+                                </div>
+                                <div className="form-row">
+                                    <label>Expiration</label>
+                                    <input
+                                        type="date"
+                                        name="expiration"
+                                        id='expiration'
+                                        required
+                                    />
+                                </div>
+                                <div className="form-row">
+                                    <label>CVV</label>
+                                    <input
+                                        type="password"
+                                        name="cvv"
+                                        id='cvv'
+                                        placeholder="&#9679;&#9679;&#9679;"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                        }
                         <div className="voucher">
                             <label>Voucher</label>
                             <input
@@ -221,6 +239,16 @@ function Payment() {
                             pauseOnHover
                             theme="light"
                         />
+
+                        <div className='COD-checkbox'>
+                            <input
+                                type="checkbox"
+                                name="payment-method"
+                                id='payment-method'
+                                onChange={(e) => handleCheckBox(e)}
+                            />
+                            <label htmlFor="">Cash on Delivery</label>
+                        </div>
 
                         {/* cartItems display */}
 
