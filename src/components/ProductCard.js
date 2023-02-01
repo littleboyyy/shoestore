@@ -97,7 +97,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
                     (
                         getProdOnSearch.length > 0 ?
                             getProdOnSearch.map(productsFound =>
-                                <Col style={{ paddingLeft: '25px' }}>
+                                <Col style={{ paddingLeft: '50px' }} xs='3'>
                                     <div className="product-card">
                                         <img className="product-image" src={productsFound.imagePath} />
                                         <h3 className="product-name overflow-wrap">{productsFound.name}</h3>

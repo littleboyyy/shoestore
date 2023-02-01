@@ -13,6 +13,9 @@ function Payment() {
     const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems'))
     const navigator = useNavigate()
     const [isPaid, setIsPaid] = useState(0)
+    const [totalCost, setTotalCost] = useState(sessionStorage.getItem('totalCost'))
+    const [getVoucher, setGetVoucher] = useState('')
+    const [disable, setDisable] = useState(false)
     const notifyPaid = () => {
         toast.success('You have ordered!', {
             position: "top-center",
@@ -25,6 +28,33 @@ function Payment() {
             theme: "light",
         });
     }
+
+    const notifyApplyVoucher = () => {
+        toast.success('You have applied a voucher -20$ !', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
+
+    const voucher = "HPNY2023"
+
+    const voucherApply = () => {
+        if (getVoucher === voucher) {
+            setTotalCost(totalCost - 20)
+            notifyApplyVoucher()
+            setDisable(true)
+        }
+        else {
+            alert('Voucher not found!')
+        }
+    }
+
 
     const postOrder = () => {
         var cus_name = document.getElementById('customer-name').value
@@ -49,7 +79,7 @@ function Payment() {
         )
         orderInfo.append('or_detail', JSON.stringify(or_detail))
         orderInfo.append('orDate', today)
-        orderInfo.append('money', sessionStorage.getItem('totalCost'))
+        orderInfo.append('money', totalCost)
 
         axios.post('http://localhost:3000/server/add_order.php', orderInfo)
             .then(
@@ -93,6 +123,7 @@ function Payment() {
                                 type="text"
                                 name="name"
                                 id='customer-name'
+                                placeholder='Name'
                                 required
                             />
                         </div>
@@ -102,6 +133,7 @@ function Payment() {
                                 type="email"
                                 name="email"
                                 id='customer-email'
+                                placeholder='Email'
                                 required
                             />
                         </div>
@@ -123,6 +155,75 @@ function Payment() {
                                 required
                             />
                         </div>
+
+                        <div className="form-row">
+                            <label>Card Number</label>
+                            <input
+                                type="text"
+                                name="card-number"
+                                id="card-number"
+                                required
+                            />
+                        </div>
+                        <div className="form-row">
+                            <label>Cardholder's Name:</label>
+                            <input
+                                type="text"
+                                name="card-holder-name"
+                                id="card-holder-name"
+                                required
+                            />
+                        </div>
+                        <div className="form-row">
+                            <label>Expiration</label>
+                            <input
+                                type="text"
+                                name="expiration"
+                                id='expiration'
+                                required
+                            />
+                        </div>
+                        <div className="form-row">
+                            <label>CVV</label>
+                            <input
+                                type="password"
+                                name="cvv"
+                                id='cvv'
+                                required
+                            />
+                        </div>
+
+                        <div className="voucher">
+                            <label>Voucher</label>
+                            <input
+                                type="text"
+                                name="voucher"
+                                id='voucher'
+                                onChange={(e) => setGetVoucher(e.target.value)}
+                                disabled={disable}
+                            />
+                        </div>
+                        <Button variant="outline-primary" className='btn-voucher'
+                            disabled={disable}
+                            onClick={() => voucherApply()}
+                        >
+                            Apply
+                        </Button>
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={1000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                        />
+
+                        {/* cartItems display */}
+
                         <h2>Cart Items</h2>
                         <div className="cart-items">
                             {cartFromSession.map(item => (
@@ -136,7 +237,7 @@ function Payment() {
                                 </div>
                             ))}
                         </div>
-                        <div className="total-price">Total: ${sessionStorage.getItem('totalCost')}</div>
+                        <div className="total-price">Total: ${totalCost}</div>
                         <button type="submit" id='btn-pay'
 
                         >Submit Payment</button>

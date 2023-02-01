@@ -115,3 +115,31 @@ h2 {
 #btn-pay:active {
     transform: scale(0.95);
 }
+
+.voucher label {
+    width: 120px;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.voucher input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+    width: 15%;
+}
+
+.voucher input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.btn-voucher {
+    position: relative;
+    left: 250px;
+    bottom: 38px;
+}
