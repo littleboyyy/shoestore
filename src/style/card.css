@@ -51,6 +51,10 @@
     background-color: #3d9140;
 }
 
+.add-to-cart:active {
+    transform: scale(0.95);
+}
+
 .overflow-wrap {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -69,4 +73,14 @@
 
 .not-found-img img {
     height: 400px;
+}
+
+.zoom {
+    transition: transform .5s;
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    transform: scale(1.2);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }

@@ -6,28 +6,32 @@ import Products from './pages/Products';
 import Admin from './pages/Admin'
 import Manage from './pages/Manage'
 import Payment from './pages/Payment';
+import SizePage from './pages/SizePage';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 function App() {
-  const navigate = useNavigate()
 
   return (
     <Routes>
+      <Route path='*' element={<Navigate to='/' />} />
       <Route path='/' element={<Home />} />
       <Route path='/home' element={<Home />} />
+      <Route path='/size-page' element={<SizePage />} />
       <Route path='/products' element={<Products />} />
-      <Route path='/admin' element={<Admin />} />
       <Route path='/payment' element={<Payment />} />
-
+      <Route path='/admin' element={<Admin />} />
 
       {
-        (localStorage.getItem('isValidate') != null && localStorage.getItem('isValidate') === 'true') ?
-          <Route path='/admin/manage' element={<Manage />} /> :
-          <Route path='/admin/manage' element={<Navigate to='/admin' replace />} />
+        (localStorage.getItem('isValidate') === null || localStorage.getItem('isValidate') === 'false') &&
+        <Route path='/admin/manage' element={<Navigate to='/admin' replace />} />
       }
+
+      <Route path='/admin/manage' element={<Manage />} />
+
 
     </Routes>
   )

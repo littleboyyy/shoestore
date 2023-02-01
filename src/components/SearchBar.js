@@ -24,25 +24,11 @@ function SearchBar({ onSearch }) {
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={handleChange}
-                style={{
-                    borderRadius: '4px',
-                    border: '1px solid #ccc',
-                    padding: '0.5em',
-                    fontSize: '1em',
-                    width: '50%',
-                    boxSizing: 'border-box',
-                    outline: 'none',
-                    maxWidth: '15%',
-                    transition: '0.2s',
-                    marginLeft: '20px',
-                    '&:focus': {
-                        borderColor: '#333',
-                    },
-                }}
             />
             <Button variant="secondary"
                 title='Find your shoes!'
                 type="submit"
+                className='btn-search'
                 style={{
                     borderRadius: '4px',
                     border: 'none',

@@ -1,4 +1,9 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
 require_once("connect_db.php");
 //thong tin ve customer:
 $cus_name=$_POST['cus_name'];
@@ -14,4 +19,3 @@ if(!$res) die("Failed to excute SQL query: $query<br>");
 
 mysqli_free_result($res);
 mysqli_close($conn);
-?>

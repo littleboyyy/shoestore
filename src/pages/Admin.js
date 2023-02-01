@@ -41,10 +41,6 @@ function Admin() {
         });
     }
 
-
-
-
-
     var userValidate = (username, password) => {
         const unameExist = items.find(x => x.uname === username)
         const passwdExist = items.find(y => y.passwd === password)
@@ -52,16 +48,16 @@ function Admin() {
         if (unameExist && passwdExist) {
             localStorage.setItem('isValidate', true)
             notifyLoginSuccess()
-            navigate('/admin/manage')
         }
         else {
-            notifyLoginFail()
+            // notifyLoginFail()
+            alert('Wrong username or password!')
             localStorage.setItem('isValidate', false)
         }
     }
 
     useEffect(() => {
-        fetch("http://localhost:3000/ReviewLab&Exers/TestJson.php")
+        fetch("http://localhost:3000/server/get_admin.php")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -71,7 +67,6 @@ function Admin() {
                 (error) => {
                     setIsLoaded(true);
                     setError(error);
-                    console.log('Loi')
                 }
             )
     }, [])
@@ -93,13 +88,14 @@ function Admin() {
                 <input type="password" placeholder="Password" name='psw' id='psw' required />
                 <br /><br />
 
-                <button type="submit" id='btn-login' onClick={() => {
-                    var username = document.getElementById('uname').value
-                    var psw = document.getElementById('psw').value
-                    console.log(username)
-                    console.log(psw)
-                    userValidate(username, psw)
-                }}>Login</button>
+
+                <a href="/admin/manage" id='tag-to-manage' >
+                    <button type="submit" id='btn-login' onClick={() => {
+                        var username = document.getElementById('uname').value
+                        var psw = document.getElementById('psw').value
+                        userValidate(username, psw)
+                    }}>Login</button>
+                </a>
 
                 <ToastContainer
                     position="top-center"

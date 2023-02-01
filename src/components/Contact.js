@@ -12,9 +12,10 @@ function Contact() {
                     <a
                         class="btn text-white btn-floating m-1"
                         style={{ backgroundColor: '#3b5998' }}
-                        href="#!"
+                        href="https://www.facebook.com/"
                         role="button"
-
+                        title='Facebook'
+                        target="_blank"
                     >
                         <FaFacebook></FaFacebook>
                     </a>
@@ -23,8 +24,10 @@ function Contact() {
                     <a
                         class="btn text-white btn-floating m-1"
                         style={{ backgroundColor: '#55acee' }}
-                        href="#!"
+                        href="https://twitter.com/"
                         role="button"
+                        title='Twitter'
+                        target="_blank"
                     >
                         <FaTwitter></FaTwitter>
                     </a>
@@ -33,8 +36,10 @@ function Contact() {
                     <a
                         class="btn text-white btn-floating m-1"
                         style={{ backgroundColor: '#ac2bac' }}
-                        href="#!"
+                        href="https://www.instagram.com/"
                         role="button"
+                        title='Instagram'
+                        target="_blank"
                     >
                         <FaInstagram></FaInstagram>
                     </a>
@@ -43,8 +48,10 @@ function Contact() {
                     <a
                         class="btn text-white btn-floating m-1"
                         style={{ backgroundColor: '#0082ca' }}
-                        href="#!"
+                        href="https://www.linkedin.com/"
                         role="button"
+                        title='LinkedIn'
+                        target="_blank"
                     >
                         <FaLinkedin></FaLinkedin>
                     </a>
@@ -52,8 +59,10 @@ function Contact() {
                     <a
                         class="btn text-white btn-floating m-1"
                         style={{ backgroundColor: '#333333' }}
-                        href="#!"
+                        href="https://github.com/leduochoang2001"
                         role="button"
+                        target="_blank"
+                        title='Github'
                     >
                         <FaGithub></FaGithub>
                     </a>

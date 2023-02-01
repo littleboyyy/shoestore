@@ -1,5 +1,24 @@
 .search-bar {
     position: relative;
     left: 20px;
-    top: 50px
+    top: 50px;
+    width: 100%;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+    width: 16%;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.btn-search:active {
+    transform: scale(0.95);
 }

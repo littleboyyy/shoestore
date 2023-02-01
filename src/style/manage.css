@@ -1,0 +1,164 @@
+/* .manage-container {
+    overflow-x: hidden;
+}
+
+/* i:hover {
+    cursor: pointer;
+} */
+
+/* .search {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid springgreen;
+}
+
+.search:focus {
+    outline: none;
+} */
+*/
+/* managePage.css */
+
+/* Add some basic styling to the page */
+
+/* Style the main container */
+
+.manage-page {
+    margin: 20px;
+}
+
+.form-container {
+    margin-bottom: 20px;
+}
+
+.table-container {
+    margin-bottom: 20px;
+}
+
+.manage-page {
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+/* Style the headings */
+.manage-page h1,
+h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Style the form */
+.manage-page form {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 200px;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #ccc;
+}
+
+/* Style the form inputs */
+.manage-page form input {
+    margin-left: 10px;
+    width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease-in-out;
+}
+
+.manage-page .category-select {
+    margin-left: 45px;
+    margin-right: 110px;
+    width: 50%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease-in-out;
+}
+
+.manage-page .brand-select {
+    margin-left: 10px;
+    margin-right: 0px;
+    width: 80%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease-in-out;
+}
+
+.manage-page .category-label {
+    margin-left: 30px;
+}
+
+/* Add hover effect to form inputs */
+.manage-page form input:hover {
+    box-shadow: 0px 0px 5px 0px #ccc;
+}
+
+/* Style the form buttons */
+.manage-page form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+    margin-left: 400px;
+}
+
+/* Add hover effect to form buttons */
+.manage-page form button:hover {
+    background-color: #3e8e41;
+}
+
+/* Style the products and orders lists */
+.manage-page ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the list items */
+.manage-page li {
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #ccc;
+    width: 100%;
+}
+
+/* Style the 'edit' and 'remove' buttons */
+.manage-page button {
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Add hover effect to 'edit' and 'remove' buttons */
+.manage-page button:hover {
+    background-color: #3e8e41;
+}
+
+.manage-page tbody td {
+    width: auto;
+}
+
+.manage-page .btn-add-product {
+    height: 45px;
+    margin-top: 28px;
+}

@@ -40,6 +40,11 @@ export default function SortBar({ onSelect }) {
                 <Dropdown.Item eventKey="default">Default</Dropdown.Item >
                 <Dropdown.Item eventKey="increase">Price Increasing</Dropdown.Item>
                 <Dropdown.Item eventKey="decrease">Price Decreasing</Dropdown.Item>
+                <Dropdown.Item eventKey="adidas">Adidas</Dropdown.Item>
+                <Dropdown.Item eventKey="ducadi">Duca Di</Dropdown.Item>
+                <Dropdown.Item eventKey="kate">Kate</Dropdown.Item>
+                <Dropdown.Item eventKey="mlb">MLB</Dropdown.Item>
+                <Dropdown.Item eventKey="whoau">Whoau</Dropdown.Item>
             </NavDropdown>
         </Nav>
     )

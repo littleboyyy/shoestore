@@ -7,12 +7,21 @@ import notFoundIMG from '../static/img/not_found_img.png'
 
 
 
-const ProductCard = ({ products, onAdd, prodOnSearch }) => {
+const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems }) => {
 
 
     const getProdOnSearch = products.filter(x =>
         x.name.toLowerCase().includes(prodOnSearch.toLowerCase())
     )
+
+    const limitAdding = (item) => {
+        const exist = cartItems.find(x => x.name === item.name)
+        if (exist.itemQuantity === parseInt(item.detail.find(x => x.size === exist.size).amount)) {
+            setCartItems(cartItems.map(x => x.name === item.name ? {
+                ...exist, itemQuantity: 1
+            } : x))
+        }
+    }
 
     const notifyAdded = () => {
         toast.success('Added to Cart!', {
@@ -46,9 +55,9 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
             {
                 prodOnSearch === '' ?
                     products.map(item => (
-                        <Col style={{ padding: '50px' }}>
+                        <Col style={{ padding: '50px' }} xs='3'>
                             <div className="product-card">
-                                <img className="product-image" src={item.imagePath} />
+                                <img className="product-image zoom" src={item.imagePath} />
                                 <h3 className="product-name overflow-wrap"
                                 >{item.name}
                                 </h3>
@@ -65,6 +74,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
                                 <button className="add-to-cart" onClick={() => {
                                     onAdd(item)
                                     notifyAdded()
+                                    limitAdding(item)
                                 }}>
                                     Add to Cart
                                 </button>
@@ -99,9 +109,24 @@ const ProductCard = ({ products, onAdd, prodOnSearch }) => {
                                                 ${parseFloat(productsFound.price - (productsFound.price * productsFound.sale / 100)).toFixed(2)}
                                             </p>
                                         </div>
-                                        <button className="add-to-cart" onClick={() => onAdd(productsFound)}>
+                                        <button className="add-to-cart" onClick={() => {
+                                            onAdd(productsFound)
+                                            notifyAdded()
+                                        }}>
                                             Add to Cart
                                         </button>
+                                        <ToastContainer
+                                            position="top-right"
+                                            autoClose={5000}
+                                            hideProgressBar={false}
+                                            newestOnTop={false}
+                                            closeOnClick
+                                            rtl={false}
+                                            pauseOnFocusLoss
+                                            draggable
+                                            pauseOnHover
+                                            theme="colored"
+                                        />
                                     </div>
                                 </Col>
                             )

@@ -25,7 +25,7 @@ import '../style/cart.css'
 import { useNavigate } from "react-router-dom";
 
 
-export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease, onSetSize }) {
+export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease, onSetSize, setCartItems }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -33,6 +33,16 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
 
     var totalCost = 0
     var shippingCost = 40
+
+    //limit the quantity of each size of products
+    const limitAdding = (item) => {
+        const exist = cartItems.find(x => x.name === item.name)
+        if (item.itemQuantity === parseInt(item.detail.find(x => x.size === item.size).amount)) {
+            setCartItems(cartItems.map(x => x.name === item.name ? {
+                ...exist, itemQuantity: 1
+            } : x))
+        }
+    }
 
 
 
@@ -120,35 +130,50 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             <p>
                                                                 <strong>{item.name}</strong>
                                                             </p>
-                                                            Color:
-                                                            <p>{item.color}</p>
-                                                            Size:
+                                                            <p><strong>Color:</strong> {item.color}</p>
+                                                            <strong>Size:</strong>
+                                                            {
+                                                                !item.size &&
+                                                                onSetSize(item, item.detail[0].size)
+                                                            }
 
                                                             <Form.Select aria-label="Default select example"
+                                                                value={item.size}
                                                                 onChange={(e) => {
                                                                     onSetSize(item, e.currentTarget.value)
+                                                                    const exist = cartItems.find(x => x.name === item.name)
+                                                                    setCartItems(cartItems.map(x => x.name === item.name ? {
+                                                                        ...exist, itemQuantity: 1
+                                                                    } : x))
                                                                 }}>
                                                                 {
-                                                                    item.sizes.map(size =>
-                                                                        <option value={size}>{size} </option>
+                                                                    item.detail.map(detail =>
+                                                                        <option value={detail.size}>{detail.size} </option>
                                                                     )
                                                                 }
                                                             </Form.Select>
+                                                            <br />
 
+                                                            <p><strong>Items left:</strong> {item.detail.find(x => x.size === item.size).amount}</p>
 
                                                             <br />
 
                                                             <Button variant="outline-danger" onClick={() => onRemove(item)}>
                                                                 <FaTrash></FaTrash>
                                                             </Button>
-                                                            <br /><br /> <br />
+
+                                                            <br /><br />
 
 
                                                             <Button style={{ paddingLeft: '13px', paddingRight: '13px' }} variant="outline-danger" onClick={() => onDecrease(item)}>
                                                                 -
                                                             </Button>
-                                                            <span style={{ marginLeft: '4px', marginRight: '4px' }}>{item.itemQuantity}</span>
-                                                            <Button variant="outline-success" onClick={() => onAdd(item)}>
+
+                                                            <span style={{ marginLeft: '3px', marginRight: '3px' }}>{item.itemQuantity}</span>
+                                                            <Button variant="outline-success" onClick={() => {
+                                                                onAdd(item)
+                                                                limitAdding(item)
+                                                            }} >
                                                                 +
                                                             </Button>
 
