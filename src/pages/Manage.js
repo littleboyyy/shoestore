@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { FaTrash } from 'react-icons/fa';
+import { FaSignOutAlt, FaTrash } from 'react-icons/fa';
 import { Table, Button, Form } from "react-bootstrap";
 import '../style/manage.css'
 import Popup from 'reactjs-popup';
@@ -121,10 +121,14 @@ function Manage() {
             .then((data) => console.log(data))
     }
 
+
     // console.log(formData)
 
     return (
         <div className="manage-page">
+            <Button variant="secondary" className='btn-logout' title='sign out'>
+                <FaSignOutAlt></FaSignOutAlt>
+            </Button>
             <h1>Products Management</h1>
             <div className="form-container">
                 <Form onSubmit={handleSubmit}>
@@ -310,10 +314,10 @@ function Manage() {
                                 <td>{order.cus_inf.name}</td>
                                 <td>{order.orderDate}</td>
                                 <td>{order.totalMoney}</td>
-                                <td>
+                                <td style={{ width: '10%' }}>
                                     <Popup
                                         trigger={<Button variant="primary" >
-                                            Detail
+                                            View Detail
                                         </Button>}
                                         position="left center"
                                     >

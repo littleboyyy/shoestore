@@ -93,6 +93,13 @@ function Payment() {
         orderInfo.append('orDate', today)
         orderInfo.append('money', totalCost)
 
+        if (isCOD) {
+            orderInfo.append('pay_method', 0)
+        }
+        else {
+            orderInfo.append('pay_method', 1)
+        }
+
         axios.post('http://localhost:3000/server/add_order.php', orderInfo)
             .then(
                 (data) => console(data)

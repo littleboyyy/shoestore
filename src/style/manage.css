@@ -162,3 +162,8 @@ h2 {
     height: 45px;
     margin-top: 28px;
 }
+
+.btn-logout {
+    position: relative;
+    left: 1250px;
+}
