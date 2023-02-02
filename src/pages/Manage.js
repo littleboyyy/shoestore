@@ -6,18 +6,19 @@ import { Table, Button, Form } from "react-bootstrap";
 import '../style/manage.css'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { useNavigate } from 'react-router-dom';
 
 function Manage() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [products, setProducts] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false)
-
     const [orders, setOrders] = useState([]);
-
     const [formData, setFormData] = useState({
         shoeID: ''
     });
+
+    const navigator = useNavigate()
 
     useEffect(() => {
         fetch("http://localhost:3000/server/ad_view_order.php")
@@ -121,12 +122,18 @@ function Manage() {
             .then((data) => console.log(data))
     }
 
+    const handleLogout = () => {
+        localStorage.setItem('isValidate', false)
+        navigator('/admin')
+    }
 
     // console.log(formData)
 
     return (
         <div className="manage-page">
-            <Button variant="secondary" className='btn-logout' title='sign out'>
+            <Button variant="secondary" className='btn-logout' title='sign out'
+                onClick={() => handleLogout()}
+            >
                 <FaSignOutAlt></FaSignOutAlt>
             </Button>
             <h1>Products Management</h1>
