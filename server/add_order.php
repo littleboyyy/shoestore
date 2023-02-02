@@ -10,7 +10,7 @@ $orDate=$_POST['orDate'];
 $money=$_POST['money'];
 $pay_method=$_POST['pay_method'];
 
-$or_detail= $_POST['or_detail']; //mang 1 chieu bao gom shoeID, size, amount
+$or_detail= json_decode($_POST['or_detail']); //mang 1 chieu bao gom shoeID, size, amount
 
 $cus_name=$_POST['cus_name'];
 $phone=$_POST['phone'];
