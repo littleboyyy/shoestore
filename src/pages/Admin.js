@@ -48,6 +48,7 @@ function Admin() {
         if (unameExist && passwdExist) {
             localStorage.setItem('isValidate', true)
             notifyLoginSuccess()
+            localStorage.setItem('username', username)
         }
         else {
             // notifyLoginFail()

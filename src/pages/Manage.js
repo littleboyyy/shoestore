@@ -125,17 +125,22 @@ function Manage() {
     const handleLogout = () => {
         localStorage.setItem('isValidate', false)
         navigator('/admin')
+        localStorage.removeItem('username')
     }
 
     // console.log(formData)
 
     return (
         <div className="manage-page">
+            <div className='display-name'>
+                <p>Welcome,{localStorage.getItem('username')}</p>
+            </div>
             <Button variant="secondary" className='btn-logout' title='sign out'
                 onClick={() => handleLogout()}
             >
                 <FaSignOutAlt></FaSignOutAlt>
             </Button>
+            <br /><br />
             <h1>Products Management</h1>
             <div className="form-container">
                 <Form onSubmit={handleSubmit}>
