@@ -6,7 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import '../style/payment.css'
-
+import Popup from 'reactjs-popup';
+import { FaEye, FaPlusCircle } from 'react-icons/fa';
+import OrderDetail from '../components/OrderDetail';
 const checkmarkImg = require('../static/img/green-checkmark-icon.png')
 
 function Payment() {
@@ -16,6 +18,7 @@ function Payment() {
     const [getVoucher, setGetVoucher] = useState('')
     const [disable, setDisable] = useState(false)
     const [isCOD, setIsCOD] = useState(false)
+    const [orderToShow, setOrderToShow] = useState({})
 
     const notifyPaid = () => {
         toast.success('You have ordered!', {
@@ -65,8 +68,7 @@ function Payment() {
         }
     }
 
-    console.log(isCOD)
-
+    console.log(orderToShow)
 
     const postOrder = () => {
         var cus_name = document.getElementById('customer-name').value
@@ -75,7 +77,19 @@ function Payment() {
         var cus_email = document.getElementById('customer-email').value
         let orderInfo = new FormData()
         let today = new Date().toISOString().slice(0, 10)
+        let date = new Date()
+        date.setDate(date.getDate() + 5)
         const or_detail = []
+        const or_to_show = {
+            customer_name: cus_name,
+            customer_address: cus_address,
+            total_cost: totalCost,
+            order_date: today,
+            deli_date: date.toISOString().slice(0, 10)
+        }
+        setOrderToShow(or_to_show)
+
+        //add to order to show after pay
 
         //add to formdata
         orderInfo.append('cus_name', cus_name)
@@ -129,6 +143,17 @@ function Payment() {
                         <a href="/products">
                             <Button variant="primary">Continue Shopping</Button>
                         </a>
+                        <br /><br />
+                        <Popup contentStyle={{ width: 'auto', height: 'auto' }}
+                            trigger={<Button variant="light" title='View your order'>
+                                View <FaEye></FaEye>
+                            </Button>}
+                            position="center-bottom"
+                        >
+                            <div>
+                                <OrderDetail order={orderToShow} />
+                            </div>
+                        </Popup>
                     </div>
                     :
                     <form onSubmit={handleSubmit}>

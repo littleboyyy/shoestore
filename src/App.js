@@ -7,6 +7,7 @@ import Admin from './pages/Admin'
 import Manage from './pages/Manage'
 import Payment from './pages/Payment';
 import SizePage from './pages/SizePage';
+import OrderDetail from './components/OrderDetail';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,6 +25,7 @@ function App() {
       <Route path='/products' element={<Products />} />
       <Route path='/payment' element={<Payment />} />
       <Route path='/admin' element={<Admin />} />
+      <Route path='/order-detail' element={<OrderDetail />} />
 
       {
         (localStorage.getItem('isValidate') === null || localStorage.getItem('isValidate') === 'false') &&
