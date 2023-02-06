@@ -11,9 +11,9 @@ function About() {
 
             <div class="w3-col m6 w3-padding-large">
                 <h1 class="w3-center">About Us</h1><br />
-                <h5 class="w3-center">We are Husters!</h5>
-                <p class="w3-large">Our team is from hust university, we sell sports shoes of brands such as Nike, Adidas, MLB, etc.. Hope you have the best experience with our products.</p>
-
+                <p class="w3-large w3-text-grey">At our shoe store, we believe that every step should be taken in comfort and style. With a passion for footwear, we offer a curated collection of the latest trends and timeless classics to suit every occasion. From sneakers to sandals, boots to loafers, we've got you covered.</p>
+                <p class="w3-large w3-text-grey">Our team of shoe enthusiasts is dedicated to providing exceptional customer service and ensuring you find the perfect pair to fit your feet and your lifestyle. Whether you're looking for a new everyday shoe or a special occasion heel, we are here to help you find the perfect fit.</p>
+                <p class="w3-large w3-text-grey">Join us on our journey to put your best foot forward. Shop our collection today and step into style with confidence.</p>
             </div>
         </div>
 
