@@ -164,7 +164,7 @@ function Products() {
                 <h1>We
                     <span class="underlined underline-clip"> Sell</span>
                     <br />
-                    Best <span class="underlined underline-mask">Shoes!</span>
+                    Best <span class="underlined underline-mask">Products!</span>
                     <br />
                     <span class="underlined underline-overflow"></span></h1>
             </div>

@@ -251,6 +251,7 @@ function Payment() {
                                 id='voucher'
                                 onChange={(e) => setGetVoucher(e.target.value)}
                                 disabled={disable}
+                                placeholder="Voucher"
                             />
                         </div>
                         <Button variant="outline-primary" className='btn-voucher'
