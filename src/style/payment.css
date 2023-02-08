@@ -156,3 +156,8 @@
     margin-right: 7px;
     accent-color: green;
 }
+
+.btn-cancel-order {
+    position: relative;
+    left: 120px;
+}

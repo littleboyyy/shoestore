@@ -13,7 +13,7 @@ const checkmarkImg = require('../static/img/green-checkmark-icon.png')
 
 function Payment() {
     const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems'))
-    const [isPaid, setIsPaid] = useState(0)
+    const [isPaid, setIsPaid] = useState(1)
     const [totalCost, setTotalCost] = useState(sessionStorage.getItem('totalCost'))
     const [getVoucher, setGetVoucher] = useState('')
     const [disable, setDisable] = useState(false)
