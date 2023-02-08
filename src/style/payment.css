@@ -161,3 +161,185 @@
     position: relative;
     left: 120px;
 }
+
+
+.check-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.check-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid green;
+    position: relative;
+    animation: icon-animation 1s ease-in-out forwards;
+}
+
+.icon-circle {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: green;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    animation: circle-animation 1s ease-in-out forwards;
+}
+
+.icon-check {
+    display: block;
+    width: 30px;
+    height: 20px;
+    border-left: 3px solid green;
+    border-bottom: 3px solid green;
+    position: absolute;
+    top: 15px;
+    left: 12px;
+    transform: rotate(-45deg) scale(0);
+    animation: check-animation 1s ease-in-out forwards;
+}
+
+.check-message {
+    margin-top: 20px;
+    font-size: 20px;
+    color: green;
+}
+
+@keyframes icon-animation {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.5);
+    }
+}
+
+@keyframes circle-animation {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale
+    }
+}
+
+@keyframes check-animation {
+    0% {
+        transform: rotate(-45deg) scale(0);
+    }
+
+    100% {
+        transform: rotate(-45deg) scale(1);
+    }
+}
+
+.cross-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.cross-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid red;
+    position: relative;
+    animation: icon-animation 1s ease-in-out forwards;
+}
+
+
+/* .cross-line {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: red;
+    position: absolute;
+    top: 30px;
+    left: 25px;
+    transform: rotate(60deg) scale(0);
+    animation: cross-animation 1s ease-in-out forwards;
+}
+
+.cross-line-1 {
+    transform-origin: left top;
+    left: 18px;
+    transform: rotate(45deg) scale(0);
+}
+
+.cross-line-2 {
+    top: 15px;
+    transform-origin: right bottom;
+    transform: rotate(-45deg) scale(0);
+} */
+
+.cross-line-1,
+.cross-line-2 {
+    position: absolute;
+    top: 70%;
+    left: 16%;
+    width: 60%;
+    height: 3px;
+    background-color: red;
+}
+
+.cross-line-1 {
+    transform-origin: left top;
+    transform: rotate(45deg) translate(-50%, -50%);
+    animation: cross-animation1 1s ease-in-out forwards;
+    margin-left: 5px;
+}
+
+.cross-line-2 {
+    transform-origin: right bottom;
+    transform: rotate(-45deg) translate(-50%, 50%);
+    animation: cross-animation2 1s ease-in-out forwards;
+}
+
+
+.cross-message {
+    margin-top: 20px;
+    font-size: 20px;
+    color: red;
+}
+
+@keyframes icon-animation {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.5);
+    }
+}
+
+@keyframes cross-animation1 {
+    0% {
+        transform: rotate(45deg) scale(0);
+    }
+
+    100% {
+        transform: rotate(-45deg) scale(1);
+    }
+}
+
+@keyframes cross-animation2 {
+    0% {
+        transform: rotate(-45deg) scale(0);
+    }
+
+    100% {
+        transform: rotate(45deg) scale(1);
+    }
+}

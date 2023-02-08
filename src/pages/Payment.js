@@ -138,22 +138,48 @@ function Payment() {
             {
                 isPaid ?
                     <div style={{ textAlign: 'center' }}>
-                        <p><img src={checkmarkImg} alt="" style={{ width: '10%', height: '50%' }} /></p>
-                        <p>Your order has been recieved!</p>
-                        <a href="/products">
-                            <Button variant="primary">Continue Shopping</Button>
-                        </a>
-                        <br /><br />
-                        <Popup contentStyle={{ width: 'auto', height: 'auto' }}
-                            trigger={<Button variant="light" title='View your order'>
-                                View <FaEye></FaEye>
-                            </Button>}
-                            position="center-bottom"
-                        >
-                            <div>
-                                <OrderDetail order={orderToShow} />
-                            </div>
-                        </Popup>
+                        {/* <p><img src={checkmarkImg} alt="" style={{ width: '10%', height: '50%' }} /></p> */}
+                        {
+                            sessionStorage.getItem('isCancelled') === 'true' ?
+                                <div>
+                                    <div className="cross-container">
+                                        <div className="cross-icon">
+                                            <span className="cross-line cross-line-1"></span>
+                                            <span className="cross-line cross-line-2"></span>
+                                        </div>
+                                        <div className="cross-message">Order cancelled.</div>
+                                    </div>
+                                    <br />
+                                    <a href="/products">
+                                        <Button variant="primary">Continue Shopping</Button>
+                                    </a>
+                                </div>
+
+                                :
+                                <div>
+                                    <div className="check-container">
+                                        <div className="check-icon">
+                                            <span className="icon-circle"></span>
+                                            <span className="icon-check"></span>
+                                        </div>
+                                        <div className="check-message">Order placed successfully!</div>
+                                    </div>
+                                    <a href="/products">
+                                        <Button variant="primary">Continue Shopping</Button>
+                                    </a>
+                                    <br /><br />
+                                    <Popup contentStyle={{ width: 'auto', height: 'auto' }}
+                                        trigger={<Button variant="light" title='View your order'>
+                                            View <FaEye></FaEye>
+                                        </Button>}
+                                        position="center-bottom"
+                                    >
+                                        <div>
+                                            <OrderDetail order={orderToShow} />
+                                        </div>
+                                    </Popup>
+                                </div>
+                        }
                     </div>
                     :
                     <form onSubmit={handleSubmit}>
