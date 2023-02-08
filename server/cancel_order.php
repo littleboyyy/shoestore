@@ -15,5 +15,10 @@ $query = "DELETE FROM shoe_order WHERE orderID=$max_orderID";
 $res = mysqli_query($conn, $query);
 if (!$res) die("Failed to excute SQL query: $query<br>");
 
+//update auto increment cua shoe_order:
+$query = "ALTER TABLE shoe_order AUTO_INCREMENT=$max_orderID";
+$res = mysqli_query($conn, $query);
+if (!$res) die("Failed to excute SQL query: $query<br>");
+
 mysqli_free_result($res);
 mysqli_close($conn);
