@@ -4,7 +4,7 @@ import '../style/sortbar.css'
 
 import { Nav, NavDropdown, Dropdown } from 'react-bootstrap';
 import { useState } from 'react';
-import { FaSort, FaSortAlphaDownAlt, FaSortNumericDownAlt, FaSortUp } from 'react-icons/fa';
+import { FaFilter, FaSort, FaSortAlphaDownAlt, FaSortNumericDownAlt, FaSortUp } from 'react-icons/fa';
 import { useEffect } from 'react';
 
 export default function SortBar({ onSelect }) {
@@ -30,7 +30,7 @@ export default function SortBar({ onSelect }) {
                 onSelect={handleSelect}
                 title={
                     <div className="nav-drop">
-                        <FaSortNumericDownAlt></FaSortNumericDownAlt>
+                        <FaFilter></FaFilter>
                     </div>
                 }
                 id="basic-nav-dropdown">
