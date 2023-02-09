@@ -139,7 +139,7 @@
     text-align: right;
     margin-right: 10px;
     position: relative;
-    bottom: 40px;
+    bottom: 30px;
 }
 
 .COD-checkbox input {
@@ -159,9 +159,8 @@
 
 .btn-cancel-order {
     position: relative;
-    left: 120px;
+    left: 0px;
 }
-
 
 .check-container {
     display: flex;

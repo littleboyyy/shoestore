@@ -9,16 +9,17 @@ import '../style/payment.css'
 import Popup from 'reactjs-popup';
 import { FaEye, FaPlusCircle } from 'react-icons/fa';
 import OrderDetail from '../components/OrderDetail';
-const checkmarkImg = require('../static/img/green-checkmark-icon.png')
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 function Payment() {
     const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems'))
-    const [isPaid, setIsPaid] = useState(1)
+    const [isPaid, setIsPaid] = useState(0)
     const [totalCost, setTotalCost] = useState(sessionStorage.getItem('totalCost'))
     const [getVoucher, setGetVoucher] = useState('')
     const [disable, setDisable] = useState(false)
     const [isCOD, setIsCOD] = useState(false)
     const [orderToShow, setOrderToShow] = useState({})
+    const [isCancelled, setIsCancelled] = useState(false)
 
     const notifyPaid = () => {
         toast.success('You have ordered!', {
@@ -33,31 +34,20 @@ function Payment() {
         });
     }
 
-    const notifyApplyVoucher = () => {
-        toast.success('You have applied a voucher -20$ !', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-    }
 
-    const voucher = "HPNY2023"
 
-    const voucherApply = () => {
-        if (getVoucher === voucher) {
-            setTotalCost(totalCost - 20)
-            notifyApplyVoucher()
-            setDisable(true)
-        }
-        else {
-            alert('Voucher not found!')
-        }
-    }
+    // const voucher = "HPNY2023"
+
+    // const voucherApply = () => {
+    //     if (getVoucher === voucher) {
+    //         setTotalCost(totalCost - 20)
+    //         notifyApplyVoucher()
+    //         setDisable(true)
+    //     }
+    //     else {
+    //         alert('Voucher not found!')
+    //     }
+    // }
 
     const handleCheckBox = (e) => {
         if (e.target.checked) {
@@ -133,14 +123,18 @@ function Payment() {
         sessionStorage.clear()
     }
 
+    const handleCancel = () => {
+        setIsCancelled(true)
+        // axios.get('http://localhost:3000/server/cancel_order.php')
+    }
+
     return (
         <div className="payment-page">
             {
                 isPaid ?
                     <div style={{ textAlign: 'center' }}>
-                        {/* <p><img src={checkmarkImg} alt="" style={{ width: '10%', height: '50%' }} /></p> */}
                         {
-                            sessionStorage.getItem('isCancelled') === 'true' ?
+                            isCancelled ?
                                 <div>
                                     <div className="cross-container">
                                         <div className="cross-icon">
@@ -163,6 +157,7 @@ function Payment() {
                                             <span className="icon-check"></span>
                                         </div>
                                         <div className="check-message">Order placed successfully!</div>
+                                        <br />
                                     </div>
                                     <a href="/products">
                                         <Button variant="primary">Continue Shopping</Button>
@@ -178,6 +173,12 @@ function Payment() {
                                             <OrderDetail order={orderToShow} />
                                         </div>
                                     </Popup>
+
+                                    <br /><br />
+                                    <Button variant="danger" className='btn-cancel-order'
+                                        onClick={() => handleCancel()}
+                                    >
+                                        Cancel Order</Button>
                                 </div>
                         }
                     </div>
@@ -225,51 +226,8 @@ function Payment() {
                             />
                         </div>
 
-                        {
-                            !isCOD &&
-                            <div>
-                                <div className="form-row">
-                                    <label>Card Number</label>
-                                    <input
-                                        type="text"
-                                        name="card-number"
-                                        id="card-number"
-                                        placeholder='Card Number'
-                                        required
-                                    />
-                                </div>
-                                <div className="form-row">
-                                    <label>Cardholder's Name:</label>
-                                    <input
-                                        type="text"
-                                        name="card-holder-name"
-                                        placeholder="Cardholder's Name"
-                                        id="card-holder-name"
-                                        required
-                                    />
-                                </div>
-                                <div className="form-row">
-                                    <label>Expiration</label>
-                                    <input
-                                        type="date"
-                                        name="expiration"
-                                        id='expiration'
-                                        required
-                                    />
-                                </div>
-                                <div className="form-row">
-                                    <label>CVV</label>
-                                    <input
-                                        type="password"
-                                        name="cvv"
-                                        id='cvv'
-                                        placeholder="&#9679;&#9679;&#9679;"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                        }
-                        <div className="voucher">
+
+                        {/* <div className="voucher">
                             <label>Voucher</label>
                             <input
                                 type="text"
@@ -279,8 +237,8 @@ function Payment() {
                                 disabled={disable}
                                 placeholder="Voucher"
                             />
-                        </div>
-                        <Button variant="outline-primary" className='btn-voucher'
+                        </div> */}
+                        {/* <Button variant="outline-primary" className='btn-voucher'
                             disabled={disable}
                             onClick={() => voucherApply()}
                         >
@@ -297,17 +255,7 @@ function Payment() {
                             draggable
                             pauseOnHover
                             theme="light"
-                        />
-
-                        <div className='COD-checkbox'>
-                            <input
-                                type="checkbox"
-                                name="payment-method"
-                                id='payment-method'
-                                onChange={(e) => handleCheckBox(e)}
-                            />
-                            <label htmlFor="">Cash on Delivery</label>
-                        </div>
+                        /> */}
 
                         {/* cartItems display */}
 
@@ -325,6 +273,52 @@ function Payment() {
                             ))}
                         </div>
                         <div className="total-price">Total: ${totalCost}</div>
+                        {
+                            !isCOD &&
+                            <div style={{ width: '20%', left: '300px', position: 'relative', top: '20px' }}>
+                                <PayPalScriptProvider options={{ "client-id": "ATL0mrOKFizHqntPMwulz0kVYQAAiF56g2GIEFUPWUBtAs4dixW9unliXkMOZyLojycOMFNqGJ3X_dIP" }}>
+                                    <PayPalButtons
+                                        style={{
+                                            layout: "horizontal",
+                                            shape: "pill",
+                                            color: "gold",
+                                            height: 40,
+
+                                        }}
+                                        createOrder={(data, actions) => {
+                                            return actions.order.create({
+                                                purchase_units: [
+                                                    {
+                                                        amount: {
+                                                            value: totalCost,
+                                                        },
+                                                    },
+                                                ],
+
+                                            });
+                                        }}
+                                        onApprove={async (data, actions) => {
+                                            const order = await actions.order.capture();
+                                            console.log(order)
+                                            postOrder()
+                                            sessionStorage.clear()
+                                        }}
+                                    />
+                                </PayPalScriptProvider>
+                            </div>
+                        }
+
+                        <div className='COD-checkbox'>
+                            <input
+                                type="checkbox"
+                                name="payment-method"
+                                id='payment-method'
+                                onChange={(e) => handleCheckBox(e)}
+                            />
+                            <label htmlFor="">Cash on Delivery</label>
+                        </div>
+
+
                         <button type="submit" id='btn-pay'
 
                         >Submit Payment</button>

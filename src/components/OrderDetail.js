@@ -5,12 +5,6 @@ import axios from 'axios';
 
 const OrderDetail = ({ order }) => {
 
-    const handleCancel = () => {
-        sessionStorage.setItem('isCancelled', true)
-        // axios.get('http://localhost:3000/server/cancel_order.php')
-        window.parent.location = window.parent.location.href;
-    }
-
     return (
         <div className="order-card">
             <div className="header">
@@ -36,10 +30,6 @@ const OrderDetail = ({ order }) => {
                     <strong>Delivery service: SPX </strong>
                 </p>
                 <br /><br />
-                <Button variant="danger" className='btn-cancel-order'
-                    onClick={() => handleCancel()}
-                >
-                    Cancel Order</Button>
             </div>
 
         </div>
