@@ -124,8 +124,19 @@ function Payment() {
     }
 
     const handleCancel = () => {
+        const ord_id = sessionStorage.getItem('ord_id')
+        const url = `https://api-m.sandbox.paypal.com/v2/payments/captures/${ord_id}/refund`
+        console.log(url)
         setIsCancelled(true)
-        // axios.get('http://localhost:3000/server/cancel_order.php')
+        axios.get('http://localhost:3000/server/cancel_order.php')
+        axios.post(url, {}, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer <Access-Token>',
+                'Accept': 'application'
+            }
+        })
+        sessionStorage.clear()
     }
 
     return (
@@ -280,9 +291,10 @@ function Payment() {
                                     <PayPalButtons
                                         style={{
                                             layout: "horizontal",
-                                            shape: "pill",
+                                            shape: 'pill',
                                             color: "gold",
                                             height: 40,
+                                            label: 'pay'
 
                                         }}
                                         createOrder={(data, actions) => {
@@ -299,9 +311,10 @@ function Payment() {
                                         }}
                                         onApprove={async (data, actions) => {
                                             const order = await actions.order.capture();
-                                            console.log(order)
+                                            console.log(order.id)
                                             postOrder()
                                             sessionStorage.clear()
+                                            sessionStorage.setItem('ord_id', order.id)
                                         }}
                                     />
                                 </PayPalScriptProvider>
