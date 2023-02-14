@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const OrderDetail = ({ order }) => {
 
+    let spxCode = Math.floor(Math.random() * 900000000000) + 100000000000;
+
     return (
         <div className="order-card">
             <div className="header">
@@ -28,6 +30,9 @@ const OrderDetail = ({ order }) => {
                 </p>
                 <p className="order-info">
                     <strong>Delivery service: SPX </strong>
+                </p>
+                <p className="order-info">
+                    <strong>Code: SPXVN{spxCode} </strong>
                 </p>
                 <br /><br />
             </div>

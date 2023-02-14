@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { FaSignOutAlt, FaTrash } from 'react-icons/fa';
+import { FaEye, FaSignOutAlt, FaTrash } from 'react-icons/fa';
 import { Table, Button, Form } from "react-bootstrap";
 import '../style/manage.css'
 import Popup from 'reactjs-popup';
@@ -328,12 +328,12 @@ function Manage() {
                                 <td>{order.totalMoney}</td>
                                 <td style={{ width: '10%' }}>
                                     <Popup
-                                        trigger={<Button variant="primary" >
-                                            View Detail
+                                        trigger={<Button variant="primary" title='View detail'>
+                                            <FaEye></FaEye>
                                         </Button>}
                                         position="left center"
                                     >
-                                        <div>
+                                        <div style={{ borderRadius: '10px' }}>
                                             {
                                                 order.detail.map(item =>
                                                     <div>

@@ -13,7 +13,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 function Payment() {
     const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems'))
-    const [isPaid, setIsPaid] = useState(0)
+    const [isPaid, setIsPaid] = useState(1)
     const [totalCost, setTotalCost] = useState(sessionStorage.getItem('totalCost'))
     const [getVoucher, setGetVoucher] = useState('')
     const [disable, setDisable] = useState(false)
@@ -24,13 +24,26 @@ function Payment() {
     const notifyPaid = () => {
         toast.success('You have ordered!', {
             position: "top-center",
-            autoClose: 1000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
             draggable: true,
             progress: undefined,
             theme: "light",
+        });
+    }
+
+    const notifyCancel = () => {
+        toast.error('You have cancelled the order!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
         });
     }
 
@@ -124,6 +137,7 @@ function Payment() {
     }
 
     const handleCancel = () => {
+        notifyCancel()
         const ord_id = sessionStorage.getItem('ord_id')
         const url = `https://api-m.sandbox.paypal.com/v2/payments/captures/${ord_id}/refund`
         console.log(url)
@@ -190,6 +204,18 @@ function Payment() {
                                         onClick={() => handleCancel()}
                                     >
                                         Cancel Order</Button>
+                                    <ToastContainer
+                                        position="top-center"
+                                        autoClose={5000}
+                                        hideProgressBar={false}
+                                        newestOnTop={false}
+                                        closeOnClick
+                                        rtl={false}
+                                        pauseOnFocusLoss
+                                        draggable
+                                        pauseOnHover
+                                        theme="colored"
+                                    />
                                 </div>
                         }
                     </div>
