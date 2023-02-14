@@ -138,6 +138,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             }
 
                                                             <Form.Select aria-label="Default select example"
+                                                                style={{ borderRadius: '10px', width: '75%' }}
                                                                 value={item.size}
                                                                 onChange={(e) => {
                                                                     onSetSize(item, e.currentTarget.value)

@@ -143,7 +143,6 @@ function Products() {
         } : x))
     }
 
-
     return (
         <div className="product-page">
             <br />
@@ -173,6 +172,10 @@ function Products() {
 
 
 
+
+
+
+
             {
                 (sortKey === '' &&
                     <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults}
@@ -181,9 +184,7 @@ function Products() {
                 (sortKey === 'default' &&
                     <ProductCard onAdd={onAdd} products={products}
                         prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />)
-            }
-
-            {
+                ||
                 (sortKey === 'increase' && products.sort((a, b) => increaseSort(a, b)) &&
                     <ProductCard onAdd={onAdd} products={products}
                         prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />)
@@ -210,6 +211,22 @@ function Products() {
                 ||
                 (sortKey === 'whoau') &&
                 <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('WHOAU'))}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                ||
+                (sortKey === 'men') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '1')}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                ||
+                (sortKey === 'women') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '2')}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                ||
+                (sortKey === 'unisex') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '3')}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                ||
+                (sortKey === 'kid') &&
+                <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '4')}
                     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
             }
         </div>

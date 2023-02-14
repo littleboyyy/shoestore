@@ -45,6 +45,10 @@ export default function SortBar({ onSelect }) {
                 <Dropdown.Item eventKey="kate">Kate</Dropdown.Item>
                 <Dropdown.Item eventKey="mlb">MLB</Dropdown.Item>
                 <Dropdown.Item eventKey="whoau">Whoau</Dropdown.Item>
+                <Dropdown.Item eventKey="men">Men</Dropdown.Item>
+                <Dropdown.Item eventKey="women">Women</Dropdown.Item>
+                <Dropdown.Item eventKey="unisex">Unisex</Dropdown.Item>
+                <Dropdown.Item eventKey="kid">Kid</Dropdown.Item>
             </NavDropdown>
         </Nav>
     )
