@@ -1,5 +1,5 @@
 import React from 'react';
-const aboutUsImg = require('../static/img/about-us-page.jpg')
+const aboutUsImg = require('../../static/img/about-us-page.jpg')
 
 
 function About() {

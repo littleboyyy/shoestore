@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Cart from "../components/Cart";
-import SearchBar from "../components/SearchBar";
-import ProductCard from "../components/ProductCard";
-import SortBar from "../components/SortBar";
+import Cart from "../components/ProductPage/Cart";
+import SearchBar from "../components/ProductPage/SearchBar";
+import ProductCard from "../components/ProductPage/ProductCard";
+import SortBar from "../components/ProductPage/SortBar";
 import { Button } from "react-bootstrap";
 import { FaArrowAltCircleLeft, FaArrowLeft, FaLongArrowAltLeft } from "react-icons/fa";
 import '../style/products.css'
+import { Link } from "react-router-dom";
 
 
 const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems')) || []
@@ -147,9 +148,9 @@ function Products() {
         <div className="product-page">
             <br />
             <Button variant="light" className="btn-back" title="Back to Home Page">
-                <a href="/">
+                <Link to={'/'}>
                     <FaLongArrowAltLeft></FaLongArrowAltLeft>
-                </a>
+                </Link>
             </Button>
             <Cart quantity={quantity} cartItems={cartItems}
                 onRemove={onRemove} onAdd={onAdd} onDecrease={onDecrease}

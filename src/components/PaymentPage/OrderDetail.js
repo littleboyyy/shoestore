@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../style/order.css';
+import '../../style/order.css';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 

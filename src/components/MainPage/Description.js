@@ -1,6 +1,6 @@
 import React from 'react';
 
-const descImg = require('../static/img/description.jpg')
+const descImg = require('../../static/img/description.jpg')
 
 function Description() {
     return (

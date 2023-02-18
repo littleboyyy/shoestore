@@ -8,12 +8,12 @@ import { useState } from 'react';
 import '../style/payment.css'
 import Popup from 'reactjs-popup';
 import { FaEye, FaPlusCircle } from 'react-icons/fa';
-import OrderDetail from '../components/OrderDetail';
+import OrderDetail from '../components/PaymentPage/OrderDetail';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 function Payment() {
     const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems'))
-    const [isPaid, setIsPaid] = useState(1)
+    const [isPaid, setIsPaid] = useState(0)
     const [totalCost, setTotalCost] = useState(sessionStorage.getItem('totalCost'))
     const [getVoucher, setGetVoucher] = useState('')
     const [disable, setDisable] = useState(false)

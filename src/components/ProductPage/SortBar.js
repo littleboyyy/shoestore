@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../style/sortbar.css'
+import '../../style/sortbar.css'
 
 import { Nav, NavDropdown, Dropdown } from 'react-bootstrap';
 import { useState } from 'react';

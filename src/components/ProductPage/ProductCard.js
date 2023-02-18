@@ -1,9 +1,9 @@
 import React from 'react';
-import '../style/card.css';
+import '../../style/card.css';
 import { Row, Col, } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import notFoundIMG from '../static/img/not_found_img.png'
+import notFoundIMG from '../../static/img/not_found_img.png'
 
 
 

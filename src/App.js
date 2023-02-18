@@ -7,7 +7,7 @@ import Admin from './pages/Admin'
 import Manage from './pages/Manage'
 import Payment from './pages/Payment';
 import SizePage from './pages/SizePage';
-import Paypal from './components/PayPal';
+import Paypal from './components/PaymentPage/PayPal';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';

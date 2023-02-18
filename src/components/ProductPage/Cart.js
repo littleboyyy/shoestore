@@ -21,7 +21,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Form from 'react-bootstrap/Form';
 
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
-import '../style/cart.css'
+import '../../style/cart.css'
 import { useNavigate } from "react-router-dom";
 
 
