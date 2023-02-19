@@ -30,7 +30,7 @@ export default function SortBar({ onSelect }) {
                 onSelect={handleSelect}
                 title={
                     <div className="nav-drop">
-                        <FaFilter></FaFilter>
+                        <FaSort></FaSort>
                     </div>
                 }
                 id="basic-nav-dropdown">
@@ -40,7 +40,7 @@ export default function SortBar({ onSelect }) {
                 <Dropdown.Item eventKey="increase">Price Increasing</Dropdown.Item>
                 <Dropdown.Item eventKey="decrease">Price Decreasing</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Header>Brand</Dropdown.Header>
+                {/* <Dropdown.Header>Brand</Dropdown.Header>
                 <Dropdown.Item eventKey="adidas">Adidas</Dropdown.Item>
                 <Dropdown.Item eventKey="ducadi">Duca Di</Dropdown.Item>
                 <Dropdown.Item eventKey="kate">Kate</Dropdown.Item>
@@ -51,7 +51,7 @@ export default function SortBar({ onSelect }) {
                 <Dropdown.Item eventKey="men">Men</Dropdown.Item>
                 <Dropdown.Item eventKey="women">Women</Dropdown.Item>
                 <Dropdown.Item eventKey="unisex">Unisex</Dropdown.Item>
-                <Dropdown.Item eventKey="kid">Kid</Dropdown.Item>
+                <Dropdown.Item eventKey="kid">Kid</Dropdown.Item> */}
             </NavDropdown>
         </Nav>
     )

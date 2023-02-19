@@ -3,10 +3,12 @@ import Cart from "../components/ProductPage/Cart";
 import SearchBar from "../components/ProductPage/SearchBar";
 import ProductCard from "../components/ProductPage/ProductCard";
 import SortBar from "../components/ProductPage/SortBar";
+import Filter from "../components/ProductPage/Filter";
 import { Button } from "react-bootstrap";
 import { FaArrowAltCircleLeft, FaArrowLeft, FaLongArrowAltLeft } from "react-icons/fa";
 import '../style/products.css'
 import { Link } from "react-router-dom";
+import Popup from 'reactjs-popup';
 
 
 const cartFromSession = JSON.parse(sessionStorage.getItem('cartItems')) || []
@@ -21,6 +23,17 @@ function Products() {
     const [sortKey, setSortKey] = useState('')
     const [cartItems, setCartItems] = useState(cartFromSession)
     const [products, setProducts] = useState([]);
+    const [filters, setFilters] = useState([])
+    const [prodOnFilter, setProdOnFilter] = useState([])
+
+    function handleFilterChange(filters) {
+        setFilters(filters)
+    }
+
+    const options = ['Adidas', 'Duca Di', 'Kate', 'MLB', 'WHOAU'];
+
+    // console.log(prodOnFilter)
+
 
     useEffect(() => {
         sessionStorage.setItem('cartItems', JSON.stringify(cartItems))
@@ -54,6 +67,14 @@ function Products() {
             }
         }
     }, [])
+
+    useEffect(() => {
+        filters.map(filter => (
+            products.filter(x => x.name.includes(filter))
+        ))
+        console.log(products)
+        setProdOnFilter(products)
+    }, filters)
 
     const getFinalPrice = (item) => {
         return parseInt(parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2))
@@ -157,9 +178,24 @@ function Products() {
                 onSetSize={onSetSize} setCartItems={setCartItems}
             />
 
+
             <br />
             <SearchBar onSearch={handleSearch} />
             <SortBar onSelect={handleSort} />
+
+            <Popup contentStyle={{ width: '24%', height: '24%' }}
+                trigger={<Button variant="light" title='Filter'
+                    style={{ marginLeft: '400px', bottom: '45px', position: 'relative' }}
+                >
+                    Filter
+                </Button>}
+                position='bottom left'
+            >
+                <div>
+                    <Filter options={options} onFilterChange={handleFilterChange} />
+                </div>
+            </Popup>
+
             <div className="product-page-message">
                 <h1>We
                     <span class="underlined underline-clip"> Sell</span>
@@ -171,64 +207,70 @@ function Products() {
 
             <br /><br /><br /><br />
 
-
+            {
+                filters.length > 0 &&
+                <ProductCard onAdd={onAdd} products={prodOnFilter}
+                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+            }
 
 
 
 
 
             {
-                (sortKey === '' &&
+                (sortKey === '' && filters.length === 0 &&
                     <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults}
                         cartItems={cartItems} setCartItems={setCartItems} />)
                 ||
-                (sortKey === 'default' &&
+                (sortKey === 'default' && filters.length === 0 && filters.length === 0 &&
                     <ProductCard onAdd={onAdd} products={products}
                         prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />)
                 ||
                 (sortKey === 'increase' && products.sort((a, b) => increaseSort(a, b)) &&
+                    filters.length === 0 &&
                     <ProductCard onAdd={onAdd} products={products}
                         prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />)
                 ||
                 (sortKey === 'decrease' && products.sort((a, b) => decreaseSort(a, b)) &&
+                    filters.length === 0 &&
                     <ProductCard onAdd={onAdd} products={products}
                         prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />)
-                ||
-                (sortKey === 'adidas') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Adidas'))}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
-                ||
-                (sortKey === 'ducadi') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Duca Di'))}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
-                ||
-                (sortKey === 'kate') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Kate'))}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
-                ||
-                (sortKey === 'mlb') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('MLB'))}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
-                ||
-                (sortKey === 'whoau') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('WHOAU'))}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
-                ||
-                (sortKey === 'men') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '1')}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
-                ||
-                (sortKey === 'women') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '2')}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
-                ||
-                (sortKey === 'unisex') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '3')}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
-                ||
-                (sortKey === 'kid') &&
-                <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '4')}
-                    prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'adidas') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Adidas'))}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'ducadi') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Duca Di'))}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'kate') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('Kate'))}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'mlb') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('MLB'))}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'whoau') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.name.includes('WHOAU'))}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'men') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '1')}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'women') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '2')}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'unisex') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '3')}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
+                // ||
+                // (sortKey === 'kid') &&
+                // <ProductCard onAdd={onAdd} products={products.filter(x => x.categoryID === '4')}
+                //     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
             }
         </div>
     )
