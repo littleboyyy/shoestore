@@ -28,6 +28,7 @@ function Products() {
 
     function handleFilterChange(filters) {
         setFilters(filters)
+        setProdOnFilter(products.filter(x => filters.some(y => x.name.includes(y))))
     }
 
     const options = ['Adidas', 'Duca Di', 'Kate', 'MLB', 'WHOAU'];
@@ -68,13 +69,11 @@ function Products() {
         }
     }, [])
 
-    useEffect(() => {
-        filters.map(filter => (
-            products.filter(x => x.name.includes(filter))
-        ))
-        console.log(products)
-        setProdOnFilter(products)
-    }, filters)
+    // useEffect(() => {
+
+    // }, filters)
+
+    console.log(prodOnFilter)
 
     const getFinalPrice = (item) => {
         return parseInt(parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2))
@@ -212,9 +211,6 @@ function Products() {
                 <ProductCard onAdd={onAdd} products={prodOnFilter}
                     prodOnSearch={searchResults} cartItems={cartItems} setCartItems={setCartItems} />
             }
-
-
-
 
 
             {
