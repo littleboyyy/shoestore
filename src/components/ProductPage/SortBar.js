@@ -34,24 +34,12 @@ export default function SortBar({ onSelect }) {
                     </div>
                 }
                 id="basic-nav-dropdown">
-
-                <Dropdown.Header>Price</Dropdown.Header>
                 <Dropdown.Item eventKey="default">Default</Dropdown.Item >
-                <Dropdown.Item eventKey="increase">Price Increasing</Dropdown.Item>
-                <Dropdown.Item eventKey="decrease">Price Decreasing</Dropdown.Item>
+                <Dropdown.Header>Price or Name</Dropdown.Header>
+                <Dropdown.Item eventKey="increase">Sort by price increasing</Dropdown.Item>
+                <Dropdown.Item eventKey="decrease">Sort by price decreasing</Dropdown.Item>
+                <Dropdown.Item eventKey="name">Sort by Name</Dropdown.Item>
                 <Dropdown.Divider />
-                {/* <Dropdown.Header>Brand</Dropdown.Header>
-                <Dropdown.Item eventKey="adidas">Adidas</Dropdown.Item>
-                <Dropdown.Item eventKey="ducadi">Duca Di</Dropdown.Item>
-                <Dropdown.Item eventKey="kate">Kate</Dropdown.Item>
-                <Dropdown.Item eventKey="mlb">MLB</Dropdown.Item>
-                <Dropdown.Item eventKey="whoau">Whoau</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Header>Category</Dropdown.Header>
-                <Dropdown.Item eventKey="men">Men</Dropdown.Item>
-                <Dropdown.Item eventKey="women">Women</Dropdown.Item>
-                <Dropdown.Item eventKey="unisex">Unisex</Dropdown.Item>
-                <Dropdown.Item eventKey="kid">Kid</Dropdown.Item> */}
             </NavDropdown>
         </Nav>
     )

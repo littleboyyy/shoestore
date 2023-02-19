@@ -57,7 +57,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
                     products.map(item => (
                         <Col style={{ padding: '50px' }} xs='3'>
                             <div className="product-card">
-                                <img className="product-image zoom" src={item.imagePath} />
+                                <img className="product-image" src={item.imagePath} />
                                 <h3 className="product-name overflow-wrap"
                                 >{item.name}
                                 </h3>
