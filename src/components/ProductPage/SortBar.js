@@ -35,10 +35,11 @@ export default function SortBar({ onSelect }) {
                 }
                 id="basic-nav-dropdown">
                 <Dropdown.Item eventKey="default">Default</Dropdown.Item >
-                <Dropdown.Header>Price or Name</Dropdown.Header>
+                <Dropdown.Header>Price</Dropdown.Header>
                 <Dropdown.Item eventKey="increase">Sort by price increasing</Dropdown.Item>
                 <Dropdown.Item eventKey="decrease">Sort by price decreasing</Dropdown.Item>
-                <Dropdown.Item eventKey="name">Sort by Name</Dropdown.Item>
+                <Dropdown.Header>Name</Dropdown.Header>
+                <Dropdown.Item eventKey="name">Sort alphabetically</Dropdown.Item>
                 <Dropdown.Divider />
             </NavDropdown>
         </Nav>
