@@ -7,7 +7,6 @@ import Admin from './pages/Admin'
 import Manage from './pages/Manage'
 import Payment from './pages/Payment';
 import SizePage from './pages/SizePage';
-import Paypal from './components/PaymentPage/PayPal';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,7 +24,6 @@ function App() {
       <Route path='/products' element={<Products />} />
       <Route path='/payment' element={<Payment />} />
       <Route path='/admin' element={<Admin />} />
-      <Route path='/paypal' element={<Paypal />} />
 
       {
         (localStorage.getItem('isValidate') === null || localStorage.getItem('isValidate') === 'false') &&
