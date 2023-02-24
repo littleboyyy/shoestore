@@ -7,6 +7,7 @@ import Admin from './pages/Admin'
 import Manage from './pages/Manage'
 import Payment from './pages/Payment';
 import SizePage from './pages/SizePage';
+import Popup from './components/ProductPage/ProductDetail';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path='/pop' element={<Popup />} />
       <Route path='*' element={<Navigate to='/' />} />
       <Route path='/' element={<Home />} />
       <Route path='/home' element={<Home />} />
