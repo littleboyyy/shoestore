@@ -4,10 +4,10 @@ import { Row, Col, } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notFoundIMG from '../../static/img/not_found_img.png'
+import Popup from './ProductDetail';
 
 
-
-const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems }) => {
+const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, onSetSize }) => {
 
 
     const getProdOnSearch = products.filter(x =>
@@ -90,6 +90,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
                                     pauseOnHover
                                     theme="colored"
                                 />
+                                <Popup product={item} cartItems={cartItems} onSetSize={onSetSize}></Popup>
                             </div>
                         </Col>
 

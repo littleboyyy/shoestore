@@ -15,7 +15,7 @@ function Navb() {
                         <Link to={'/size-page'} className='w3-bar-item w3-button'>Size Chart</Link>
                         {/* <a href="/products" class="w3-bar-item w3-button">Products</a>
                         <a href="/size-page" target="_blank" class="w3-bar-item w3-button"></a> */}
-                        <a href="#about" class="w3-bar-item w3-button">About</a>
+                        <a href="#about" class="w3-bar-item w3-button">About Us</a>
                         <a href="#desc" class="w3-bar-item w3-button">Description</a>
                         <a href="#contact" class="w3-bar-item w3-button">Contact</a>
                     </div>

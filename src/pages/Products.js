@@ -224,7 +224,7 @@ function Products() {
             {
                 (sortKey === '' && filters.length === 0 &&
                     <ProductCard onAdd={onAdd} products={products} prodOnSearch={searchResults}
-                        cartItems={cartItems} setCartItems={setCartItems} />)
+                        cartItems={cartItems} setCartItems={setCartItems} onSetSize={onSetSize} />)
                 ||
                 (sortKey === 'default' && filters.length === 0 &&
                     <ProductCard onAdd={onAdd} products={products}
