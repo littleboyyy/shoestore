@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../style/card.css';
 import { Row, Col, } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,6 +8,11 @@ import Popup from './ProductDetail';
 
 
 const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, onSetSize }) => {
+
+    const [showDetail, setShowDetail] = useState(false);
+
+    const handleCloseDetail = () => setShowDetail(false);
+    const handleShowDetail = () => setShowDetail(true);
 
 
     const getProdOnSearch = products.filter(x =>
@@ -57,7 +62,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, o
                     products.map(item => (
                         <Col style={{ padding: '50px' }} xs='3'>
                             <div className="product-card">
-                                <img className="product-image" src={item.imagePath} />
+                                <img className="product-image" src={item.imagePath} onClick={handleShowDetail()} />
                                 <h3 className="product-name overflow-wrap"
                                 >{item.name}
                                 </h3>
@@ -90,7 +95,9 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, o
                                     pauseOnHover
                                     theme="colored"
                                 />
-                                <Popup product={item} cartItems={cartItems} onSetSize={onSetSize}></Popup>
+                                <Popup product={item} cartItems={cartItems} onSetSize={onSetSize}
+                                    onAdd={onAdd} show={showDetail}
+                                ></Popup>
                             </div>
                         </Col>
 
