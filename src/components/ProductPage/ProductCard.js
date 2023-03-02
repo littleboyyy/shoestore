@@ -9,12 +9,6 @@ import Popup from './ProductDetail';
 
 const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, onSetSize }) => {
 
-    const [showDetail, setShowDetail] = useState(false);
-
-    const handleCloseDetail = () => setShowDetail(false);
-    const handleShowDetail = () => setShowDetail(true);
-
-
     const getProdOnSearch = products.filter(x =>
         x.name.toLowerCase().includes(prodOnSearch.toLowerCase())
     )
@@ -54,6 +48,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, o
         });
     }
 
+    // console.log(showDetail)
 
     return (
         <Row>
@@ -62,7 +57,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, o
                     products.map(item => (
                         <Col style={{ padding: '50px' }} xs='3'>
                             <div className="product-card">
-                                <img className="product-image" src={item.imagePath} onClick={handleShowDetail()} />
+                                <img className="product-image" src={item.imagePath} />
                                 <h3 className="product-name overflow-wrap"
                                 >{item.name}
                                 </h3>
@@ -96,7 +91,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, o
                                     theme="colored"
                                 />
                                 <Popup product={item} cartItems={cartItems} onSetSize={onSetSize}
-                                    onAdd={onAdd} show={showDetail}
+                                    onAdd={onAdd} limitAdding={limitAdding}
                                 ></Popup>
                             </div>
                         </Col>
@@ -135,6 +130,9 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, o
                                             pauseOnHover
                                             theme="colored"
                                         />
+                                        <Popup product={productsFound} cartItems={cartItems} onSetSize={onSetSize}
+                                            onAdd={onAdd} limitAdding={limitAdding}
+                                        ></Popup>
                                     </div>
                                 </Col>
                             )
