@@ -58,6 +58,8 @@ const Popup = ({ product, cartItems, onSetSize, onAdd, limitAdding }) => {
                         </div>
                         <button onClick={() => {
                             onAdd(product)
+                            console.log(prodSize)
+                            onSetSize(cartItems.find(x => x.name === product.name), prodSize)
                             limitAdding()
                         }}>
                             Add to Cart
