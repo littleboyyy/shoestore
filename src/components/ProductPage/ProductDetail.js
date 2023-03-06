@@ -4,7 +4,7 @@ import { Button, Offcanvas } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { FaEye, FaRegEye } from 'react-icons/fa';
 
-const Popup = ({ product, cartItems, onSetSize, onAdd, limitAdding }) => {
+const ProductDetail = ({ product, cartItems, onSetSize, onAdd, limitAdding }) => {
 
     const [show, setShow] = useState(false);
     const [prodSize, setProdSize] = useState(product.detail[0].size)
@@ -37,11 +37,10 @@ const Popup = ({ product, cartItems, onSetSize, onAdd, limitAdding }) => {
                     <div className="popup">
                         <div className="popup-inner">
                             <img className="popup-image" src={product.imagePath} alt={product.name} />
-                            <h2>{product.name}</h2>
-                            <p>description</p>
-                            <p>Price:{product.price}</p>
+                            <h3>{product.name}</h3>
+                            <p><strong>Color:</strong> {product.color}</p>
 
-                            <label htmlFor="size">Size:</label>
+                            <label htmlFor="size"><strong>Size:</strong></label>
                             <Form.Select aria-label="Default select example"
                                 style={{ borderRadius: '10px', width: '12%', marginLeft: '200px', position: 'relative' }}
                                 value={prodSize}
@@ -55,11 +54,14 @@ const Popup = ({ product, cartItems, onSetSize, onAdd, limitAdding }) => {
                                     )
                                 }
                             </Form.Select>
+                            {show &&
+                                <p><strong>Items left:</strong> {product.detail.find(x => x.size === prodSize).amount}</p>
+                            }
                         </div>
                         <button onClick={() => {
                             onAdd(product)
+                            onSetSize(product, prodSize)
                             console.log(prodSize)
-                            onSetSize(cartItems.find(x => x.name === product.name), prodSize)
                             limitAdding()
                         }}>
                             Add to Cart
@@ -72,4 +74,4 @@ const Popup = ({ product, cartItems, onSetSize, onAdd, limitAdding }) => {
     );
 };
 
-export default Popup;
+export default ProductDetail;

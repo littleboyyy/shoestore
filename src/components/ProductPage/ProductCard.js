@@ -4,7 +4,7 @@ import { Row, Col, } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notFoundIMG from '../../static/img/not_found_img.png'
-import Popup from './ProductDetail';
+import ProductDetail from './ProductDetail';
 
 
 const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, onSetSize }) => {
@@ -90,9 +90,9 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, o
                                     pauseOnHover
                                     theme="colored"
                                 />
-                                <Popup product={item} cartItems={cartItems} onSetSize={onSetSize}
+                                <ProductDetail product={item} cartItems={cartItems} onSetSize={onSetSize}
                                     onAdd={onAdd} limitAdding={limitAdding}
-                                ></Popup>
+                                />
                             </div>
                         </Col>
 
@@ -130,9 +130,9 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, o
                                             pauseOnHover
                                             theme="colored"
                                         />
-                                        <Popup product={productsFound} cartItems={cartItems} onSetSize={onSetSize}
+                                        <ProductDetail product={productsFound} cartItems={cartItems} onSetSize={onSetSize}
                                             onAdd={onAdd} limitAdding={limitAdding}
-                                        ></Popup>
+                                        />
                                     </div>
                                 </Col>
                             )
