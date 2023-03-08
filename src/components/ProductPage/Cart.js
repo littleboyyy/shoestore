@@ -21,7 +21,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Form from 'react-bootstrap/Form';
 
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
-import '../style/cart.css'
+import '../../style/cart.css'
 import { useNavigate } from "react-router-dom";
 
 
@@ -57,7 +57,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
         <>
             <Button
                 onClick={handleShow}
-                style={{ width: "3rem", height: "3rem", position: 'absolute', right: '16px' }}
+                style={{ width: "3.3rem", height: "3.3rem", position: 'absolute', right: '16px' }}
                 variant="outline-primary"
                 className="rounded-circle "
             >
@@ -113,7 +113,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
 
                                                 <MDBCardBody>
                                                     <MDBRow>
-                                                        <MDBCol lg="3" md="12" className="mb-4 mb-lg-0">
+                                                        <MDBCol lg="4" md="12" className="mb-4 mb-lg-0">
                                                             <MDBRipple rippleTag="div" rippleColor="light"
                                                                 className="bg-image rounded hover-zoom hover-overlay">
                                                                 <img
@@ -126,7 +126,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             </MDBRipple>
                                                         </MDBCol>
 
-                                                        <MDBCol lg="5" md="6" className=" mb-4 mb-lg-0">
+                                                        <MDBCol lg="8" md="6" className=" mb-4 mb-lg-0">
                                                             <p>
                                                                 <strong>{item.name}</strong>
                                                             </p>
@@ -138,6 +138,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             }
 
                                                             <Form.Select aria-label="Default select example"
+                                                                style={{ borderRadius: '10px', width: '40%' }}
                                                                 value={item.size}
                                                                 onChange={(e) => {
                                                                     onSetSize(item, e.currentTarget.value)
@@ -178,7 +179,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                             </Button>
 
                                                             <br /><br />
-                                                            <p className="text-start text-md-center">
+                                                            <p className="">
                                                                 <strong>${parseFloat(item.price - (item.price * item.sale / 100)).toFixed(2)}</strong>
                                                             </p>
                                                         </MDBCol>
@@ -221,7 +222,7 @@ export default function Cart({ quantity, onRemove, cartItems, onAdd, onDecrease,
                                                     <MDBListGroupItem
                                                         className="d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                                         <div>
-                                                            <strong>Total amount</strong>
+                                                            <strong>Total Price</strong>
                                                             <strong>
                                                                 <p className="mb-0"></p>
                                                             </strong>

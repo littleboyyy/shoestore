@@ -8,6 +8,7 @@ require_once("connect_db.php");
 
 $orDate = $_POST['orDate'];
 $money = $_POST['money'];
+$pay_method = $_POST['pay_method'];
 
 $or_detail = json_decode($_POST['or_detail']); //mang 1 chieu bao gom shoeID, size, amount
 
@@ -29,15 +30,13 @@ $row = mysqli_fetch_row($res);
 $cusID = $row[0];
 
 //them shoe_order
-$query = "INSERT INTO shoe_order(customerID, orderDate, totalMoney) values
-        ($cusID,'$orDate', $money);";
+$query = "INSERT INTO shoe_order(customerID, orderDate, pay_method, totalMoney) values
+        ($cusID,'$orDate', $pay_method, $money);";
 $res = mysqli_query($conn, $query);
 if (!$res) die("Failed to excute SQL query: $query<br>");
 
 /* them order_detail */
-//yêu cầu đóng gói $or_detail thành mảng 2 chiều, 
-//mỗi phần tử là 1 mảng gồm 3 phần tử: 
-//$or_detail[i]=array($shoeID,$size,$amount);
+//$or_detail=array($shoeID,$size,$amount,$shoeID,$size,$amount,...);
 
 $query = "SELECT MAX(orderID) FROM shoe_order";
 $res = mysqli_query($conn, $query);

@@ -1,14 +1,13 @@
-import React from 'react';
-import '../style/card.css';
+import React, { useState } from 'react';
+import '../../style/card.css';
 import { Row, Col, } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import notFoundIMG from '../static/img/not_found_img.png'
+import notFoundIMG from '../../static/img/not_found_img.png'
+import ProductDetail from './ProductDetail';
 
 
-
-const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems }) => {
-
+const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems, onSetSize }) => {
 
     const getProdOnSearch = products.filter(x =>
         x.name.toLowerCase().includes(prodOnSearch.toLowerCase())
@@ -49,6 +48,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
         });
     }
 
+    // console.log(showDetail)
 
     return (
         <Row>
@@ -57,7 +57,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
                     products.map(item => (
                         <Col style={{ padding: '50px' }} xs='3'>
                             <div className="product-card">
-                                <img className="product-image zoom" src={item.imagePath} />
+                                <img className="product-image" src={item.imagePath} />
                                 <h3 className="product-name overflow-wrap"
                                 >{item.name}
                                 </h3>
@@ -90,6 +90,9 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
                                     pauseOnHover
                                     theme="colored"
                                 />
+                                <ProductDetail product={item} cartItems={cartItems} onSetSize={onSetSize}
+                                    onAdd={onAdd} limitAdding={limitAdding}
+                                />
                             </div>
                         </Col>
 
@@ -97,7 +100,7 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
                     (
                         getProdOnSearch.length > 0 ?
                             getProdOnSearch.map(productsFound =>
-                                <Col style={{ paddingLeft: '25px' }}>
+                                <Col style={{ padding: '50px' }} xs='3'>
                                     <div className="product-card">
                                         <img className="product-image" src={productsFound.imagePath} />
                                         <h3 className="product-name overflow-wrap">{productsFound.name}</h3>
@@ -126,6 +129,9 @@ const ProductCard = ({ products, onAdd, prodOnSearch, cartItems, setCartItems })
                                             draggable
                                             pauseOnHover
                                             theme="colored"
+                                        />
+                                        <ProductDetail product={productsFound} cartItems={cartItems} onSetSize={onSetSize}
+                                            onAdd={onAdd} limitAdding={limitAdding}
                                         />
                                     </div>
                                 </Col>
