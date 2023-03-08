@@ -30,7 +30,7 @@ function Products() {
     }, [quantity])
 
     useEffect(() => {
-        fetch("http://localhost:3000/server/get_all_prod.php")
+        fetch("http://localhost/server/get_all_prod.php")
             .then(res => res.json())
             .then(
                 (result) => {

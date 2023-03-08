@@ -4,7 +4,7 @@ header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 $username = "root";
-$password = "";
+$password = "22336688";
 $server = "localhost";
 $dbname = "shoe_store";
 $conn = mysqli_connect($server, $username, $password, $dbname);
